@@ -3,33 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PREMIOVAAPS - Exclusive Digital Loyalty Card</title>
-    <!-- Tailwind CSS -->
+    <title>PREMIOVAAPS — Digital Loyalty Card</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cinzel (Luxury Serif) & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Canvas Confetti for Celebration Animations -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        espresso: '#1E110A',
-                        cocoa: '#2C1810',
-                        mocha: '#4A2C2A',
-                        latte: '#8C6239',
-                        cream: '#FDF8F2',
-                        parchment: '#F5EBE0',
-                        gold: {
-                            light: '#F3E5AB',
-                            DEFAULT: '#D4AF37',
-                            dark: '#AA7C11',
-                            shine: '#FFF3B0'
-                        }
+                        espresso: '#23140E',
+                        chocolate: '#382016',
+                        cocoa: '#4E2E20',
+                        gold: '#D4AF37',
+                        goldLight: '#F4DF92',
+                        goldDark: '#997A15',
+                        cream: '#FAF5EB',
+                        creamDark: '#EFE5D1'
                     },
                     fontFamily: {
                         serif: ['Cinzel', 'serif'],
@@ -39,49 +30,59 @@
             }
         }
     </script>
-
     <style>
-        /* Custom Luxury Styles & Animations */
         body {
-            background-color: #FDF8F2;
-            color: #2C1810;
+            background-color: #23140E;
+            color: #FAF5EB;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Metallic Gold Gradient Text */
-        .text-gold-gradient {
-            background: linear-gradient(135deg, #D4AF37 0%, #FFF3B0 50%, #AA7C11 100%);
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(24px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes stampDrop {
+            0% { opacity: 0; transform: scale(2.2) rotate(-25deg); }
+            65% { opacity: 1; transform: scale(0.92) rotate(-10deg); }
+            100% { opacity: 1; transform: scale(1) rotate(-12deg); }
+        }
+
+        @keyframes shimmerGold {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 18px rgba(212, 175, 55, 0.35); }
+            50% { box-shadow: 0 0 32px rgba(212, 175, 55, 0.75); }
+        }
+
+        .animate-entry {
+            animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .animate-stamp {
+            animation: stampDrop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .gold-text-shimmer {
+            background: linear-gradient(90deg, #D4AF37 0%, #FFF3B8 45%, #D4AF37 90%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shimmerGold 4s linear infinite;
         }
 
-        /* Metallic Gold Button */
-        .btn-gold {
-            background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
-            color: #1E110A;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
-        }
-        .btn-gold:hover {
-            background: linear-gradient(135deg, #E5C158 0%, #B8860B 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-        }
-        .btn-gold:active {
-            transform: translateY(0);
-        }
-
-        /* Elongated Luxury Loyalty Card */
         .loyalty-card-bg {
-            background: radial-gradient(circle at top right, #4A2C2A 0%, #2C1810 45%, #1E110A 100%);
-            border: 2px solid rgba(212, 175, 55, 0.6);
-            box-shadow: 0 20px 40px -15px rgba(30, 17, 10, 0.7), inset 0 0 30px rgba(212, 175, 55, 0.15);
+            background: linear-gradient(135deg, #2D1911 0%, #442619 50%, #23140E 100%);
+            border: 1.5px solid rgba(212, 175, 55, 0.55);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 0 30px rgba(212, 175, 55, 0.08);
             position: relative;
             overflow: hidden;
         }
 
-        /* Shimmer effect on card */
         .loyalty-card-bg::before {
             content: '';
             position: absolute;
@@ -89,598 +90,536 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0) 40%,
-                rgba(212, 175, 55, 0.12) 50%,
-                rgba(255, 255, 255, 0) 60%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            transform: rotate(30deg);
-            animation: cardShimmer 7s infinite linear;
+            background: radial-gradient(circle at 75% 25%, rgba(212, 175, 55, 0.14), transparent 45%);
             pointer-events: none;
         }
 
-        @keyframes cardShimmer {
-            0% { transform: translateX(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) rotate(30deg); }
-        }
-
-        /* Stamp Animations */
-        @keyframes stampSlam {
-            0% {
-                transform: scale(2.8) rotate(-25deg);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(0.9) rotate(-8deg);
-                opacity: 1;
-            }
-            80% {
-                transform: scale(1.05) rotate(-12deg);
-            }
-            100% {
-                transform: scale(1) rotate(-10deg);
-                opacity: 1;
-            }
-        }
-
-        .stamp-animated {
-            animation: stampSlam 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-
         .stamp-seal {
-            background: radial-gradient(circle, #FFF3B0 0%, #D4AF37 55%, #8A6208 100%);
-            border: 2px dashed #2C1810;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 6px rgba(255, 255, 255, 0.8);
-            transform: rotate(-10deg);
+            border: 2px dashed #D4AF37;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(56, 32, 22, 0.9) 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4), inset 0 0 8px rgba(244, 223, 146, 0.35);
+            transform: rotate(-12deg);
         }
 
-        /* Smooth Fade & Slide Transitions */
-        .fade-in-up {
-            animation: fadeInUp 0.5s ease-out forwards;
+        .reward-ready {
+            animation: pulseGlow 2.2s infinite;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F5EBE0;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #8C6239;
-            border-radius: 9999px;
-        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #23140E; }
+        ::-webkit-scrollbar-thumb { background: #4E2E20; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between bg-cream text-cocoa selection:bg-gold selection:text-espresso">
+<body class="min-h-screen flex flex-col justify-between selection:bg-gold selection:text-espresso">
 
-    <!-- Global Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full px-4 sm:px-0 pointer-events-none"></div>
-
-    <!-- Custom Modal Container (Replaces alert/confirm) -->
-    <div id="custom-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-espresso/80 backdrop-blur-sm p-4">
-        <div class="bg-cream border-2 border-gold rounded-2xl max-w-md w-full p-6 shadow-2xl fade-in-up">
-            <div class="flex items-center gap-3 mb-3">
-                <div id="modal-icon" class="w-10 h-10 rounded-full bg-gold/20 text-gold-dark flex items-center justify-center text-lg">
-                    <i class="fa-solid fa-crown"></i>
-                </div>
-                <h3 id="modal-title" class="font-serif text-xl font-bold text-cocoa">Konfirmasi</h3>
-            </div>
-            <p id="modal-message" class="text-sm text-mocha mb-4 leading-relaxed"></p>
-            <div id="modal-input-wrapper" class="hidden mb-4">
-                <label id="modal-input-label" class="block text-xs font-semibold uppercase tracking-wider text-latte mb-1">Alasan</label>
-                <textarea id="modal-input" rows="3" class="w-full rounded-xl border border-latte/40 bg-white px-3 py-2 text-sm text-cocoa focus:border-gold focus:outline-none" placeholder="Tuliskan alasan secara jelas..."></textarea>
-            </div>
-            <div class="flex justify-end gap-3 mt-5">
-                <button id="modal-cancel-btn" class="px-4 py-2 rounded-xl text-sm font-semibold text-mocha hover:bg-parchment transition">Batal</button>
-                <button id="modal-confirm-btn" class="btn-gold px-5 py-2 rounded-xl text-sm font-bold">Lanjutkan</button>
-            </div>
-        </div>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="hidden fixed inset-0 z-50 bg-espresso/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3">
+        <div class="w-10 h-10 border-4 border-gold/30 border-t-gold rounded-full animate-spin"></div>
+        <p class="text-xs font-semibold tracking-wider text-goldLight uppercase">Menghubungkan Database Cloud...</p>
     </div>
 
-    <!-- Top Navigation Bar -->
-    <header class="bg-espresso text-cream border-b border-gold/30 sticky top-0 z-40 shadow-md">
-        <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between">
-            <!-- Brand Logo (Secret Admin Trigger on 5 rapid clicks on crown icon) -->
-            <div class="flex items-center gap-2.5 select-none">
-                <button id="secret-crown-trigger" type="button" class="w-9 h-9 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-espresso shadow-inner focus:outline-none" title="PREMIOVAAPS">
-                    <i class="fa-solid fa-crown text-base"></i>
-                </button>
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- Header -->
+    <header class="w-full border-b border-gold/20 bg-espresso/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer select-none" id="brandLogoTrigger" title="PREMIOVAAPS Loyalty">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-goldLight via-gold to-goldDark flex items-center justify-center text-espresso shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+                    </svg>
+                </div>
                 <div>
-                    <span class="font-serif font-extrabold tracking-widest text-lg sm:text-xl text-gold-gradient block leading-none">PREMIOVAAPS</span>
-                    <span class="text-[10px] tracking-[0.25em] text-gold-light/70 uppercase block mt-0.5">VIP Loyalty Club</span>
+                    <h1 class="font-serif text-xl sm:text-2xl font-extrabold tracking-wider gold-text-shimmer">PREMIOVAAPS</h1>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-cream/60">VIP Digital Loyalty Card</p>
                 </div>
             </div>
-
-            <!-- Navigation Actions -->
-            <div id="nav-actions" class="flex items-center gap-2">
-                <!-- Filled dynamically based on auth state -->
+            <div class="flex items-center gap-2">
+                <span id="dbStatusBadge" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-[10px] text-emerald-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Cloud Sync
+                </span>
+                <div id="headerActions" class="hidden">
+                    <button onclick="logout()" class="px-3.5 py-1.5 rounded-lg border border-gold/40 text-goldLight text-xs sm:text-sm font-medium hover:bg-gold hover:text-espresso transition-all duration-200">
+                        Keluar
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Viewport -->
-    <main class="flex-grow flex flex-col items-center justify-center px-4 py-8 w-full max-w-5xl mx-auto">
-
-        <!-- Loading Spinner State -->
-        <div id="view-loading" class="flex flex-col items-center justify-center py-20">
-            <div class="w-12 h-12 border-4 border-gold/30 border-t-gold rounded-full animate-spin mb-4"></div>
-            <p class="font-serif text-sm tracking-widest text-mocha uppercase">Memuat Sistem PREMIOVAAPS...</p>
-        </div>
-
-        <!-- 1. MEMBER AUTH VIEW (LOGIN & REGISTER) -->
-        <section id="view-member-auth" class="hidden w-full max-w-md fade-in-up">
-            <div class="bg-white/90 backdrop-blur-md border border-gold/40 rounded-3xl p-6 sm:p-8 shadow-xl">
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center px-4 py-8">
+        
+        <!-- ==================== 1. AUTH VIEW (MEMBER & ADMIN) ==================== -->
+        <section id="authSection" class="w-full max-w-md animate-entry">
+            <!-- Member Auth Card -->
+            <div id="memberAuthCard" class="bg-chocolate/90 border border-gold/30 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-sm">
                 <div class="text-center mb-6">
-                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-espresso text-gold mb-3 shadow-lg border border-gold/40">
-                        <i class="fa-solid fa-gem text-2xl"></i>
-                    </div>
-                    <h1 class="font-serif text-2xl font-bold text-cocoa tracking-wide">PREMIOVAAPS</h1>
-                    <p class="text-xs text-latte mt-1">Kumpulkan 10 stempel & nikmati hadiah aplikasi premium gratis</p>
+                    <span class="inline-block px-3 py-1 rounded-full bg-gold/15 border border-gold/30 text-goldLight text-xs font-semibold tracking-wider uppercase mb-2">
+                        Membership Eksklusif
+                    </span>
+                    <h2 class="font-serif text-2xl font-bold text-cream">Selamat Datang</h2>
+                    <p class="text-sm text-cream/70 mt-1">Kumpulkan 10 stempel & tukarkan aplikasi premium gratis.</p>
                 </div>
 
-                <!-- Tab Switcher -->
-                <div class="grid grid-cols-2 bg-parchment p-1 rounded-xl mb-6 border border-latte/20">
-                    <button type="button" id="tab-login" onclick="switchAuthTab('login')" class="py-2 text-sm font-bold rounded-lg bg-espresso text-gold shadow transition">Masuk Member</button>
-                    <button type="button" id="tab-register" onclick="switchAuthTab('register')" class="py-2 text-sm font-semibold rounded-lg text-mocha hover:text-cocoa transition">Daftar Baru</button>
+                <!-- Tabs Login / Daftar -->
+                <div class="grid grid-cols-2 gap-2 p-1 bg-espresso rounded-xl mb-6 border border-gold/15">
+                    <button id="tabLoginBtn" onclick="switchAuthTab('login')" class="py-2 rounded-lg text-sm font-semibold bg-gradient-to-r from-gold to-goldDark text-espresso shadow transition-all">
+                        Masuk Member
+                    </button>
+                    <button id="tabRegisterBtn" onclick="switchAuthTab('register')" class="py-2 rounded-lg text-sm font-semibold text-cream/70 hover:text-cream transition-all">
+                        Daftar Baru
+                    </button>
                 </div>
 
-                <!-- Login Form -->
-                <form id="form-member-login" class="space-y-4">
+                <!-- Form Login Member -->
+                <form id="memberLoginForm" onsubmit="handleMemberLogin(event)" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-mocha mb-1.5">Nama Member</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-latte"><i class="fa-solid fa-user"></i></span>
-                            <input type="text" id="login-name" required placeholder="Masukkan nama terdaftar" class="w-full pl-10 pr-4 py-3 rounded-xl bg-cream border border-latte/30 text-sm focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none">
-                        </div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-goldLight mb-1.5">Nama Lengkap / Username</label>
+                        <input type="text" id="loginName" required placeholder="Masukkan nama akun Anda"
+                            class="w-full px-4 py-3 rounded-xl bg-espresso border border-gold/25 text-cream placeholder-cream/35 focus:outline-none focus:border-gold transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-mocha mb-1.5">Password</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-latte"><i class="fa-solid fa-lock"></i></span>
-                            <input type="password" id="login-pass" required placeholder="Masukkan password" class="w-full pl-10 pr-4 py-3 rounded-xl bg-cream border border-latte/30 text-sm focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none">
-                        </div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-goldLight mb-1.5">Password</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••"
+                            class="w-full px-4 py-3 rounded-xl bg-espresso border border-gold/25 text-cream placeholder-cream/35 focus:outline-none focus:border-gold transition">
                     </div>
-                    <button type="submit" class="w-full btn-gold py-3.5 rounded-xl font-bold text-sm tracking-wide uppercase mt-2">
-                        Buka Kartu Saya <i class="fa-solid fa-arrow-right ml-1.5"></i>
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldLight via-gold to-goldDark text-espresso font-bold text-sm tracking-wide shadow-lg hover:brightness-110 active:scale-[0.99] transition-all">
+                        Buka Kartu Loyalty Saya
                     </button>
                 </form>
 
-                <!-- Register Form -->
-                <form id="form-member-register" class="space-y-4 hidden">
+                <!-- Form Register Member -->
+                <form id="memberRegisterForm" onsubmit="handleMemberRegister(event)" class="space-y-4 hidden">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-mocha mb-1.5">Nama Lengkap / Panggilan</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-latte"><i class="fa-solid fa-user-plus"></i></span>
-                            <input type="text" id="reg-name" required minlength="3" placeholder="Contoh: Siti Aisyah" class="w-full pl-10 pr-4 py-3 rounded-xl bg-cream border border-latte/30 text-sm focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none">
-                        </div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-goldLight mb-1.5">Nama Member</label>
+                        <input type="text" id="regName" required minlength="3" placeholder="Contoh: Putri Maharani"
+                            class="w-full px-4 py-3 rounded-xl bg-espresso border border-gold/25 text-cream placeholder-cream/35 focus:outline-none focus:border-gold transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-mocha mb-1.5">Buat Password</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-latte"><i class="fa-solid fa-key"></i></span>
-                            <input type="password" id="reg-pass" required minlength="4" placeholder="Minimal 4 karakter" class="w-full pl-10 pr-4 py-3 rounded-xl bg-cream border border-latte/30 text-sm focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none">
-                        </div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-goldLight mb-1.5">Buat Password</label>
+                        <input type="password" id="regPassword" required minlength="4" placeholder="Minimal 4 karakter"
+                            class="w-full px-4 py-3 rounded-xl bg-espresso border border-gold/25 text-cream placeholder-cream/35 focus:outline-none focus:border-gold transition">
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-mocha mb-1.5">Konfirmasi Password</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-latte"><i class="fa-solid fa-shield-halved"></i></span>
-                            <input type="password" id="reg-pass-confirm" required minlength="4" placeholder="Ulangi password" class="w-full pl-10 pr-4 py-3 rounded-xl bg-cream border border-latte/30 text-sm focus:border-gold focus:ring-1 focus:ring-gold focus:outline-none">
-                        </div>
-                    </div>
-                    <button type="submit" class="w-full btn-gold py-3.5 rounded-xl font-bold text-sm tracking-wide uppercase mt-2">
-                        Daftar & Buat Kartu VIP <i class="fa-solid fa-sparkles ml-1.5"></i>
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldLight via-gold to-goldDark text-espresso font-bold text-sm tracking-wide shadow-lg hover:brightness-110 active:scale-[0.99] transition-all">
+                        Daftar & Buat Kartu Digital
                     </button>
                 </form>
 
-                <!-- Subtle Portal Switcher -->
-                <div class="mt-6 pt-4 border-t border-latte/20 flex items-center justify-between text-xs text-latte">
-                    <span>Kartu tersimpan permanen di akun</span>
-                    <button type="button" onclick="openAdminAuthView()" class="text-mocha/70 hover:text-cocoa font-medium transition">Portal Staff</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. MEMBER DASHBOARD VIEW -->
-        <section id="view-member-dashboard" class="hidden w-full max-w-3xl space-y-6 fade-in-up">
-
-            <!-- Dynamic Admin Decision Notification Banner -->
-            <div id="member-notification-area" class="hidden"></div>
-
-            <!-- Elongated Luxury Digital Loyalty Card -->
-            <div class="loyalty-card-bg rounded-3xl p-6 sm:p-8 text-cream shadow-2xl">
-                <!-- Card Header -->
-                <div class="flex flex-wrap items-start justify-between gap-4 border-b border-gold/25 pb-5 mb-6">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-crown text-gold text-lg"></i>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold tracking-widest text-gold-gradient">PREMIOVAAPS</h2>
-                        </div>
-                        <p class="text-xs text-gold-light/80 tracking-wider uppercase mt-1">Official Digital Loyalty Card</p>
-                    </div>
-                    <div class="text-left sm:text-right bg-espresso/60 border border-gold/30 rounded-2xl px-4 py-2.5">
-                        <p class="text-[11px] uppercase tracking-wider text-gold-light/70">Pemilik Kartu</p>
-                        <p id="card-member-name" class="font-bold text-base text-white tracking-wide">-</p>
-                        <p class="text-xs font-mono text-gold mt-0.5">ID: <span id="card-member-id">-</span></p>
-                    </div>
-                </div>
-
-                <!-- Progress Summary -->
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-xs sm:text-sm font-medium text-gold-light">Koleksi Stempel Pembelian</span>
-                    <span class="px-3 py-1 rounded-full bg-gold/20 border border-gold/40 text-gold font-bold text-xs sm:text-sm">
-                        <span id="card-stamp-count">0</span> / 10 Stempel
-                    </span>
-                </div>
-
-                <!-- 10 Stamp Slots Grid (Elongated 5x2 layout on desktop/tablet, responsive on mobile) -->
-                <div id="stamps-grid" class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 my-4">
-                    <!-- 10 Stamp Slots injected by JS -->
-                </div>
-
-                <!-- Card Footer -->
-                <div class="mt-6 pt-4 border-t border-gold/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-gold-light/70">
-                    <span><i class="fa-solid fa-circle-check text-gold mr-1"></i> 1 Pembelian Aplikasi Premium = 1 Stempel</span>
-                    <span>Kumpulkan 10 stempel untuk klaim hadiah gratis</span>
-                </div>
-            </div>
-
-            <!-- Reward Claim Section (Unlocked at 10 Stamps) -->
-            <div id="reward-claim-card" class="bg-white border-2 border-gold/40 rounded-3xl p-6 shadow-lg transition-all">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="font-serif text-lg sm:text-xl font-bold text-cocoa flex items-center gap-2">
-                            <i class="fa-solid fa-gift text-gold-dark"></i> Pilihan Hadiah Member
-                        </h3>
-                        <p id="reward-subtitle" class="text-xs sm:text-sm text-mocha mt-0.5">Kumpulkan 10 stempel untuk membuka kunci klaim hadiah!</p>
-                    </div>
-                    <span id="reward-lock-badge" class="px-3 py-1 rounded-full bg-parchment text-mocha text-xs font-bold border border-latte/30">
-                        <i class="fa-solid fa-lock mr-1"></i> Terkunci
-                    </span>
-                </div>
-
-                <!-- 3 Preset Reward Options -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-4">
-                    <button type="button" onclick="selectAndClaimReward('Canva 1 bulan')" id="btn-reward-canva" disabled
-                        class="reward-option-btn group relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-parchment bg-cream/60 text-center transition opacity-60 cursor-not-allowed">
-                        <div class="w-11 h-11 rounded-full bg-gold/20 text-gold-dark flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition">
-                            <i class="fa-solid fa-palette"></i>
-                        </div>
-                        <span class="font-bold text-sm text-cocoa">Canva 1 bulan</span>
-                        <span class="text-[11px] text-latte mt-0.5">Pro Design Access</span>
-                    </button>
-
-                    <button type="button" onclick="selectAndClaimReward('CapCut 7 hari')" id="btn-reward-capcut" disabled
-                        class="reward-option-btn group relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-parchment bg-cream/60 text-center transition opacity-60 cursor-not-allowed">
-                        <div class="w-11 h-11 rounded-full bg-gold/20 text-gold-dark flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition">
-                            <i class="fa-solid fa-clapperboard"></i>
-                        </div>
-                        <span class="font-bold text-sm text-cocoa">CapCut 7 hari</span>
-                        <span class="text-[11px] text-latte mt-0.5">Pro Video Editor</span>
-                    </button>
-
-                    <button type="button" onclick="selectAndClaimReward('Netflix 7 hari')" id="btn-reward-netflix" disabled
-                        class="reward-option-btn group relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-parchment bg-cream/60 text-center transition opacity-60 cursor-not-allowed">
-                        <div class="w-11 h-11 rounded-full bg-gold/20 text-gold-dark flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition">
-                            <i class="fa-solid fa-film"></i>
-                        </div>
-                        <span class="font-bold text-sm text-cocoa">Netflix 7 hari</span>
-                        <span class="text-[11px] text-latte mt-0.5">Ultra HD Streaming</span>
-                    </button>
-                </div>
-
-                <!-- Pending Claim Status Box -->
-                <div id="pending-claim-box" class="hidden mt-5 p-4 rounded-2xl bg-amber-50 border border-amber-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div class="flex items-start gap-3">
-                        <i class="fa-solid fa-clock text-amber-600 text-lg mt-0.5"></i>
-                        <div>
-                            <p class="text-sm font-bold text-amber-900">Pengajuan Klaim Sedang Diproses Admin</p>
-                            <p class="text-xs text-amber-800 mt-0.5">Hadiah dipilih: <strong id="pending-reward-name">-</strong>. Stempel tetap 10 hingga disetujui admin.</p>
-                        </div>
-                    </div>
-                    <button type="button" id="btn-resend-wa" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow shrink-0 transition">
-                        <i class="fa-brands fa-whatsapp text-base"></i> Kirim Ulang WA
+                <div class="mt-6 pt-4 border-t border-gold/15 flex items-center justify-between text-xs text-cream/50">
+                    <span>1 Pembelian = 1 Stempel</span>
+                    <button type="button" onclick="toggleAdminLogin(true)" class="text-gold/70 hover:text-gold underline transition">
+                        Portal Staff
                     </button>
                 </div>
             </div>
 
-            <!-- Stamp & Claim History Section -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Stamp Date History -->
-                <div class="bg-white border border-latte/25 rounded-3xl p-6 shadow-md">
-                    <h4 class="font-serif text-base font-bold text-cocoa mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-stamp text-gold-dark"></i> Riwayat Pemberian Stempel
-                    </h4>
-                    <div id="member-stamp-history" class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
-                        <!-- Populated via JS -->
-                    </div>
-                </div>
-
-                <!-- Claim History -->
-                <div class="bg-white border border-latte/25 rounded-3xl p-6 shadow-md">
-                    <h4 class="font-serif text-base font-bold text-cocoa mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-award text-gold-dark"></i> Riwayat Klaim Hadiah
-                    </h4>
-                    <div id="member-claim-history" class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
-                        <!-- Populated via JS -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. SEPARATE ADMIN LOGIN VIEW (NO HINTS / NO CREDENTIALS DISPLAYED) -->
-        <section id="view-admin-auth" class="hidden w-full max-w-md fade-in-up">
-            <div class="bg-espresso text-cream border-2 border-gold/50 rounded-3xl p-6 sm:p-8 shadow-2xl">
-                <div class="text-center mb-6">
-                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gold/15 text-gold border border-gold/40 mb-3">
-                        <i class="fa-solid fa-shield-halved text-2xl"></i>
-                    </div>
-                    <h2 class="font-serif text-2xl font-bold text-gold-gradient tracking-wider">ADMIN PANEL</h2>
-                    <p class="text-xs text-gold-light/70 mt-1">Akses Terbatas Pengelola PREMIOVAAPS</p>
-                </div>
-
-                <form id="form-admin-login" class="space-y-4">
+            <!-- Admin Auth Card -->
+            <div id="adminAuthCard" class="hidden bg-espresso border-2 border-gold/40 rounded-2xl p-6 sm:p-8 shadow-2xl">
+                <div class="flex items-center justify-between mb-6">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-gold-light/80 mb-1.5">Nama Admin</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gold/70"><i class="fa-solid fa-user-tie"></i></span>
-                            <input type="text" id="admin-name-input" required autocomplete="off" class="w-full pl-10 pr-4 py-3 rounded-xl bg-cocoa border border-gold/30 text-white text-sm focus:border-gold focus:outline-none">
-                        </div>
+                        <span class="text-[11px] font-bold uppercase tracking-widest text-gold">Restricted Access</span>
+                        <h2 class="font-serif text-2xl font-bold text-cream">Admin PREMIOVAAPS</h2>
+                    </div>
+                    <button type="button" onclick="toggleAdminLogin(false)" class="text-xs px-3 py-1.5 rounded-lg bg-chocolate text-cream/80 hover:text-gold transition">
+                        ← Kembali
+                    </button>
+                </div>
+
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-goldLight mb-1.5">Nama Admin</label>
+                        <input type="text" id="adminNameInput" required autocomplete="off" placeholder="Masukkan nama admin"
+                            class="w-full px-4 py-3 rounded-xl bg-chocolate/70 border border-gold/30 text-cream placeholder-cream/30 focus:outline-none focus:border-gold transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-gold-light/80 mb-1.5">Password Admin</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gold/70"><i class="fa-solid fa-key"></i></span>
-                            <input type="password" id="admin-pass-input" required class="w-full pl-10 pr-4 py-3 rounded-xl bg-cocoa border border-gold/30 text-white text-sm focus:border-gold focus:outline-none">
-                        </div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-goldLight mb-1.5">Password Admin</label>
+                        <input type="password" id="adminPassInput" required placeholder="••••••••"
+                            class="w-full px-4 py-3 rounded-xl bg-chocolate/70 border border-gold/30 text-cream placeholder-cream/30 focus:outline-none focus:border-gold transition">
                     </div>
-                    <button type="submit" class="w-full btn-gold py-3.5 rounded-xl font-bold text-sm tracking-wider uppercase mt-2">
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-gold to-goldDark text-espresso font-bold text-sm tracking-wide shadow-lg hover:brightness-110 transition-all">
                         Masuk Dashboard Admin
                     </button>
                 </form>
+            </div>
+        </section>
 
-                <div class="mt-6 pt-4 border-t border-gold/20 text-center">
-                    <button type="button" onclick="openMemberAuthView()" class="text-xs text-gold-light/80 hover:text-gold transition">
-                        <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Halaman Member
+        <!-- ==================== 2. MEMBER DASHBOARD ==================== -->
+        <section id="memberDashboard" class="hidden w-full max-w-3xl space-y-6 animate-entry">
+            <div id="memberNotificationArea" class="space-y-3"></div>
+
+            <!-- Kartu Loyalty Memanjang & Elegan -->
+            <div class="loyalty-card-bg rounded-3xl p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gold/25">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-gold text-lg">♛</span>
+                            <h2 class="font-serif text-2xl sm:text-3xl font-extrabold tracking-widest gold-text-shimmer">PREMIOVAAPS</h2>
+                        </div>
+                        <p class="text-xs text-cream/70 tracking-wider uppercase mt-1">Official Digital Loyalty Card</p>
+                    </div>
+                    <div class="sm:text-right bg-espresso/70 px-4 py-2.5 rounded-xl border border-gold/25">
+                        <p class="text-[11px] uppercase tracking-wider text-goldLight/80">Pemilik Kartu</p>
+                        <p id="cardMemberName" class="font-bold text-base sm:text-lg text-cream">-</p>
+                        <p class="text-xs font-mono text-gold mt-0.5">ID: <span id="cardMemberId">-</span></p>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center justify-between text-xs sm:text-sm">
+                    <span class="text-cream/80">Progres Koleksi Stempel</span>
+                    <span class="font-bold text-goldLight"><span id="stampCountText">0</span> / 10 Stempel</span>
+                </div>
+                <div class="w-full h-2.5 bg-espresso rounded-full mt-2 overflow-hidden border border-gold/20">
+                    <div id="stampProgressBar" class="h-full bg-gradient-to-r from-goldDark via-gold to-goldLight transition-all duration-700" style="width: 0%"></div>
+                </div>
+
+                <div id="stampsGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 my-7"></div>
+
+                <div class="pt-4 border-t border-gold/20 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-cream/65">
+                    <span>Setiap pembelian aplikasi premium = 1 stempel</span>
+                    <span class="text-goldLight font-medium">Kumpulkan 10 stempel untuk hadiah gratis!</span>
+                </div>
+            </div>
+
+            <!-- Panel Klaim Hadiah -->
+            <div id="rewardClaimSection" class="hidden bg-gradient-to-br from-chocolate to-espresso border-2 border-gold rounded-2xl p-6 reward-ready">
+                <div class="flex items-start gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gold text-espresso flex items-center justify-center font-bold text-xl shrink-0">🎁</div>
+                    <div>
+                        <h3 class="font-serif text-lg sm:text-xl font-bold text-goldLight">Selamat! 10 Stempel Terkumpul</h3>
+                        <p class="text-xs sm:text-sm text-cream/80 mt-0.5">
+                            Pilih salah satu hadiah gratis di bawah ini. Pengajuan akan dikirim otomatis ke WhatsApp Admin PREMIOVAAPS untuk verifikasi.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="pendingClaimBanner" class="hidden mb-4 p-4 rounded-xl bg-gold/15 border border-gold/40 text-xs sm:text-sm text-cream">
+                    ⏳ <strong>Pengajuan Klaim Sedang Diproses:</strong> Anda telah mengajukan klaim <span id="pendingRewardName" class="text-goldLight font-bold"></span>. Kartu akan direset otomatis setelah Admin menyetujui klaim Anda.
+                </div>
+
+                <div id="rewardButtonsGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button onclick="claimReward('Canva 1 bulan')" class="group p-4 rounded-xl bg-espresso border border-gold/40 hover:bg-gold hover:text-espresso transition-all text-left flex flex-col justify-between">
+                        <span class="text-xs uppercase tracking-wider text-gold group-hover:text-espresso/80 font-semibold">Pilihan 1</span>
+                        <span class="font-bold text-base mt-1">Canva 1 bulan</span>
+                        <span class="text-[11px] mt-2 text-cream/60 group-hover:text-espresso font-medium">Klik untuk Klaim via WA →</span>
                     </button>
+
+                    <button onclick="claimReward('CapCut 7 hari')" class="group p-4 rounded-xl bg-espresso border border-gold/40 hover:bg-gold hover:text-espresso transition-all text-left flex flex-col justify-between">
+                        <span class="text-xs uppercase tracking-wider text-gold group-hover:text-espresso/80 font-semibold">Pilihan 2</span>
+                        <span class="font-bold text-base mt-1">CapCut 7 hari</span>
+                        <span class="text-[11px] mt-2 text-cream/60 group-hover:text-espresso font-medium">Klik untuk Klaim via WA →</span>
+                    </button>
+
+                    <button onclick="claimReward('Netflix 7 hari')" class="group p-4 rounded-xl bg-espresso border border-gold/40 hover:bg-gold hover:text-espresso transition-all text-left flex flex-col justify-between">
+                        <span class="text-xs uppercase tracking-wider text-gold group-hover:text-espresso/80 font-semibold">Pilihan 3</span>
+                        <span class="font-bold text-base mt-1">Netflix 7 hari</span>
+                        <span class="text-[11px] mt-2 text-cream/60 group-hover:text-espresso font-medium">Klik untuk Klaim via WA →</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Riwayat Stempel & Riwayat Klaim Member -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-chocolate/70 border border-gold/20 rounded-2xl p-5">
+                    <h3 class="font-serif text-base font-bold text-goldLight mb-3 flex items-center gap-2">
+                        <span>📜</span> Riwayat Pemberian Stempel
+                    </h3>
+                    <div id="memberStampHistory" class="space-y-2.5 max-h-60 overflow-y-auto pr-1 text-sm">
+                        <p class="text-cream/50 text-xs italic">Belum ada riwayat stempel.</p>
+                    </div>
+                </div>
+
+                <div class="bg-chocolate/70 border border-gold/20 rounded-2xl p-5">
+                    <h3 class="font-serif text-base font-bold text-goldLight mb-3 flex items-center gap-2">
+                        <span>🏆</span> Riwayat Klaim Hadiah
+                    </h3>
+                    <div id="memberClaimHistory" class="space-y-2.5 max-h-60 overflow-y-auto pr-1 text-sm">
+                        <p class="text-cream/50 text-xs italic">Belum ada riwayat klaim hadiah.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. SEPARATE ADMIN DASHBOARD VIEW -->
-        <section id="view-admin-dashboard" class="hidden w-full space-y-6 fade-in-up">
-            <!-- Admin Stats Overview -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                <div class="bg-espresso text-cream p-4 rounded-2xl border border-gold/30 shadow">
-                    <p class="text-[11px] uppercase tracking-wider text-gold-light/70">Total Member</p>
-                    <p id="stat-total-members" class="font-serif text-2xl font-bold text-gold mt-1">0</p>
+        <!-- ==================== 3. ADMIN DASHBOARD ==================== -->
+        <section id="adminDashboard" class="hidden w-full max-w-5xl space-y-6 animate-entry">
+            <div class="bg-gradient-to-r from-chocolate via-cocoa to-chocolate border border-gold/40 rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold">Panel Kontrol Administrator</span>
+                    <h2 class="font-serif text-2xl font-bold text-cream mt-0.5">Manajemen Loyalty PREMIOVAAPS</h2>
                 </div>
-                <div class="bg-espresso text-cream p-4 rounded-2xl border border-gold/30 shadow">
-                    <p class="text-[11px] uppercase tracking-wider text-gold-light/70">Klaim Menunggu</p>
-                    <p id="stat-pending-claims" class="font-serif text-2xl font-bold text-amber-400 mt-1">0</p>
-                </div>
-                <div class="bg-espresso text-cream p-4 rounded-2xl border border-gold/30 shadow">
-                    <p class="text-[11px] uppercase tracking-wider text-gold-light/70">Klaim Disetujui</p>
-                    <p id="stat-approved-claims" class="font-serif text-2xl font-bold text-emerald-400 mt-1">0</p>
-                </div>
-                <div class="bg-espresso text-cream p-4 rounded-2xl border border-gold/30 shadow">
-                    <p class="text-[11px] uppercase tracking-wider text-gold-light/70">Total Stempel Aktif</p>
-                    <p id="stat-active-stamps" class="font-serif text-2xl font-bold text-gold-light mt-1">0</p>
-                </div>
-            </div>
-
-            <!-- Admin Main Navigation Tabs -->
-            <div class="flex flex-wrap gap-2 bg-parchment p-1.5 rounded-2xl border border-latte/20">
-                <button type="button" id="admin-tab-members" onclick="switchAdminTab('members')" class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-espresso text-gold shadow transition">
-                    <i class="fa-solid fa-users mr-1.5"></i> Kelola Member & Stempel
-                </button>
-                <button type="button" id="admin-tab-claims" onclick="switchAdminTab('claims')" class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold text-mocha hover:text-cocoa transition relative">
-                    <i class="fa-solid fa-gift mr-1.5"></i> Pengajuan & Riwayat Klaim
-                    <span id="badge-pending-count" class="hidden ml-1.5 px-2 py-0.5 text-[10px] rounded-full bg-red-600 text-white font-bold">0</span>
-                </button>
-            </div>
-
-            <!-- ADMIN TAB 1: MEMBER SEARCH, CARD VIEW & STAMPING -->
-            <div id="admin-panel-members" class="space-y-6">
-                <!-- Search Bar -->
-                <div class="bg-white p-4 sm:p-5 rounded-3xl border border-latte/30 shadow-md">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-mocha mb-2">Cari Member (Nama atau ID Member)</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-latte"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" id="admin-search-input" placeholder="Ketik nama member atau ID (misal: PRM-8492)..." class="w-full pl-11 pr-4 py-3 rounded-xl bg-cream border border-latte/30 text-sm focus:border-gold focus:outline-none">
+                <div class="flex items-center gap-3 text-center">
+                    <button onclick="syncFromCloud(true)" class="px-3 py-2 rounded-xl bg-espresso border border-gold/40 text-goldLight text-xs font-semibold hover:bg-gold hover:text-espresso transition">
+                        ↻ Refresh Data
+                    </button>
+                    <div class="bg-espresso/80 px-4 py-2 rounded-xl border border-gold/25">
+                        <p class="text-[11px] text-cream/60">Total Member</p>
+                        <p id="statTotalMembers" class="text-lg font-bold text-goldLight">0</p>
                     </div>
-                </div>
-
-                <!-- Member List & Selected Member Detail Split -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    <!-- Left: Members List -->
-                    <div class="lg:col-span-5 bg-white rounded-3xl border border-latte/30 p-5 shadow-md">
-                        <h3 class="font-serif text-base font-bold text-cocoa mb-3">Daftar Member Terdaftar</h3>
-                        <div id="admin-members-list" class="space-y-2.5 max-h-[480px] overflow-y-auto pr-1">
-                            <!-- Injected via JS -->
-                        </div>
-                    </div>
-
-                    <!-- Right: Selected Member Card & Stamp Controls -->
-                    <div class="lg:col-span-7">
-                        <div id="admin-member-detail-empty" class="bg-white/70 border-2 border-dashed border-latte/30 rounded-3xl p-10 text-center flex flex-col items-center justify-center h-full min-h-[320px]">
-                            <i class="fa-solid fa-id-card text-4xl text-latte/50 mb-3"></i>
-                            <p class="font-serif font-bold text-cocoa">Pilih Member di Sebelah Kiri</p>
-                            <p class="text-xs text-mocha mt-1">Klik salah satu member untuk melihat kartu, menambah stempel, dan melihat riwayat.</p>
-                        </div>
-
-                        <div id="admin-member-detail-card" class="hidden bg-white border border-gold/40 rounded-3xl p-6 shadow-lg space-y-5">
-                            <!-- Member Header Info -->
-                            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-parchment pb-4">
-                                <div>
-                                    <span class="text-[11px] font-mono bg-espresso text-gold px-2.5 py-0.5 rounded-md" id="adm-det-id">ID: -</span>
-                                    <h3 class="font-serif text-xl font-bold text-cocoa mt-1" id="adm-det-name">-</h3>
-                                    <p class="text-xs text-latte" id="adm-det-joined">Bergabung: -</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-xs text-mocha">Jumlah Stempel</p>
-                                    <p class="font-serif text-2xl font-extrabold text-gold-dark"><span id="adm-det-stamps">0</span> / 10</p>
-                                </div>
-                            </div>
-
-                            <!-- Visual Mini Loyalty Card for Admin -->
-                            <div class="loyalty-card-bg rounded-2xl p-4 text-cream">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="font-serif text-xs font-bold tracking-widest text-gold">KARTU PREMIOVAAPS</span>
-                                    <span class="text-[11px] text-gold-light/80" id="adm-card-status-text">Aktif</span>
-                                </div>
-                                <div id="adm-stamps-grid" class="grid grid-cols-5 gap-2">
-                                    <!-- 10 mini stamps -->
-                                </div>
-                            </div>
-
-                            <!-- Action: Give Stamp -->
-                            <div class="bg-parchment/70 p-4 rounded-2xl border border-latte/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                <div>
-                                    <p class="text-sm font-bold text-cocoa">Tambah Stempel Pembelian</p>
-                                    <p class="text-xs text-mocha">Tanggal pemberian tercatat otomatis hari ini.</p>
-                                </div>
-                                <button type="button" id="btn-admin-add-stamp" onclick="adminGiveStamp()" class="btn-gold px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shrink-0">
-                                    <i class="fa-solid fa-stamp"></i> +1 Stempel PREMIOVAAPS
-                                </button>
-                            </div>
-
-                            <!-- Admin View of Member's Stamp History -->
-                            <div>
-                                <h4 class="text-xs font-bold uppercase tracking-wider text-mocha mb-2">Riwayat Pemberian Stempel Member Ini</h4>
-                                <div id="adm-det-stamp-history" class="space-y-2 max-h-44 overflow-y-auto pr-1">
-                                    <!-- Populated via JS -->
-                                </div>
-                            </div>
-                        </div>
+                    <div class="bg-espresso/80 px-4 py-2 rounded-xl border border-gold/25">
+                        <p class="text-[11px] text-cream/60">Klaim Pending</p>
+                        <p id="statPendingClaims" class="text-lg font-bold text-amber-400">0</p>
                     </div>
                 </div>
             </div>
 
-            <!-- ADMIN TAB 2: REWARD CLAIMS MANAGEMENT & HISTORY -->
-            <div id="admin-panel-claims" class="hidden space-y-6">
-                <div class="bg-white rounded-3xl border border-latte/30 p-6 shadow-md">
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-                        <div>
-                            <h3 class="font-serif text-lg font-bold text-cocoa">Daftar Pengajuan & Riwayat Klaim Hadiah</h3>
-                            <p class="text-xs text-mocha">Setujui klaim untuk mereset kartu member menjadi 0 stempel, atau tolak dengan alasan.</p>
-                        </div>
-                    </div>
+            <!-- Pengajuan Klaim Hadiah -->
+            <div class="bg-chocolate/80 border border-gold/30 rounded-2xl p-6">
+                <h3 class="font-serif text-lg font-bold text-goldLight mb-4 flex items-center gap-2">
+                    <span>🔔</span> Pengajuan Klaim Hadiah Member
+                </h3>
+                <div id="adminClaimsList" class="space-y-3">
+                    <p class="text-sm text-cream/50 italic">Tidak ada pengajuan klaim saat ini.</p>
+                </div>
+            </div>
 
-                    <div id="admin-claims-list" class="space-y-3">
-                        <!-- Injected via JS -->
+            <!-- Pencarian & Daftar Member -->
+            <div class="bg-chocolate/80 border border-gold/30 rounded-2xl p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+                    <h3 class="font-serif text-lg font-bold text-goldLight">Daftar Member & Pemberian Stempel</h3>
+                    <div class="relative w-full sm:w-72">
+                        <input type="text" id="adminSearchInput" oninput="renderAdminDashboard()" placeholder="Cari nama atau ID member..."
+                            class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-espresso border border-gold/30 text-sm text-cream placeholder-cream/40 focus:outline-none focus:border-gold">
+                        <span class="absolute left-3 top-2.5 text-gold/70 text-sm">🔍</span>
                     </div>
+                </div>
+
+                <div id="adminMembersList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+
+            <!-- Log Global -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-espresso/90 border border-gold/20 rounded-2xl p-5">
+                    <h4 class="font-serif text-sm font-bold text-goldLight uppercase tracking-wider mb-3">Log Pemberian Stempel Terbaru</h4>
+                    <div id="adminGlobalStampLog" class="space-y-2 max-h-64 overflow-y-auto text-xs"></div>
+                </div>
+                <div class="bg-espresso/90 border border-gold/20 rounded-2xl p-5">
+                    <h4 class="font-serif text-sm font-bold text-goldLight uppercase tracking-wider mb-3">Riwayat Semua Klaim (Disetujui / Ditolak)</h4>
+                    <div id="adminGlobalClaimLog" class="space-y-2 max-h-64 overflow-y-auto text-xs"></div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Elegant Footer -->
-    <footer class="bg-espresso text-gold-light/60 border-t border-gold/20 py-4 px-4 text-center text-xs">
-        <p class="font-serif tracking-widest text-gold/90 font-semibold">PREMIOVAAPS EXCLUSIVE LOYALTY</p>
-        <p class="mt-1 text-[11px]">&copy; 2026 PREMIOVAAPS. Seluruh hak cipta dilindungi.</p>
+    <!-- Modal Detail Kartu Member -->
+    <div id="adminMemberModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-chocolate border-2 border-gold rounded-2xl max-w-lg w-full p-6 shadow-2xl animate-entry max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-gold/25 pb-3 mb-4">
+                <div>
+                    <h3 id="modalMemberName" class="font-serif text-xl font-bold text-goldLight">-</h3>
+                    <p id="modalMemberId" class="text-xs font-mono text-cream/70">-</p>
+                </div>
+                <button onclick="closeAdminMemberModal()" class="w-8 h-8 rounded-full bg-espresso text-cream hover:text-gold flex items-center justify-center">✕</button>
+            </div>
+
+            <div class="mb-4">
+                <div class="flex justify-between text-xs mb-2">
+                    <span class="text-cream/80">Status Kartu Saat Ini:</span>
+                    <span id="modalStampCount" class="font-bold text-goldLight">0 / 10 Stempel</span>
+                </div>
+                <div id="modalStampsGrid" class="grid grid-cols-5 gap-2"></div>
+            </div>
+
+            <div class="mt-5">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-goldLight mb-2">Riwayat Tanggal Stempel Member Ini</h4>
+                <div id="modalStampHistory" class="space-y-1.5 max-h-44 overflow-y-auto bg-espresso/70 p-3 rounded-xl border border-gold/15 text-xs"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Penolakan Klaim -->
+    <div id="rejectModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-espresso border-2 border-red-400/60 rounded-2xl max-w-md w-full p-6 shadow-2xl animate-entry">
+            <h3 class="font-serif text-lg font-bold text-red-300 mb-1">Tolak Pengajuan Klaim</h3>
+            <p class="text-xs text-cream/70 mb-4">Admin wajib menuliskan alasan penolakan agar member mendapatkan notifikasi yang jelas.</p>
+            <input type="hidden" id="rejectClaimId">
+            <textarea id="rejectReasonInput" rows="3" required placeholder="Contoh: Bukti transaksi ke-10 belum terverifikasi di mutasi..."
+                class="w-full p-3 rounded-xl bg-chocolate border border-gold/25 text-sm text-cream placeholder-cream/40 focus:outline-none focus:border-red-400 mb-4"></textarea>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeRejectModal()" class="px-4 py-2 rounded-xl bg-chocolate text-xs font-semibold text-cream/80 hover:text-cream">Batal</button>
+                <button type="button" onclick="confirmRejectClaim()" class="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-xs font-bold text-white">Kirim Penolakan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-gold/15 py-5 text-center text-xs text-cream/50">
+        <p>© 2026 <span class="text-gold font-serif font-semibold">PREMIOVAAPS</span> • Premium Apps & Digital Loyalty System</p>
     </footer>
 
-    <!-- Firebase & Application Logic -->
+    <!-- Firebase SDK (Realtime Database REST & Modular Sync) -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, addDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-        // ==========================================
-        // 1. FIREBASE INITIALIZATION & AUTH GUARD
-        // ==========================================
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'premiovaaps-loyalty-app';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        // ==================== KONFIGURASI FIREBASE ====================
+        // Ganti konfigurasi di bawah ini dengan milik Anda dari Firebase Console
+        const firebaseConfig = {
+            apiKey: "AIzaSyADIbNdPeq9tGdKVqvYOpeNu4yZgUCtWaE",
+            authDomain: "premiovaaps.firebaseapp.com",
+            databaseURL: "https://premiovaaps-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "premiovaaps",
+            storageBucket: "premiovaaps.firebasestorage.app",
+            messagingSenderId: "489324312186",
+            appId: "1:489324312186:web:35599746b9e17962d16dc3",
+            measurementId: "G-RESB1D300C"
+        };
 
-        let db = null;
-        let auth = null;
-        let isFirebaseReady = false;
+        const isFirebaseConfigured = !firebaseConfig.databaseURL.includes("GANTI_DENGAN");
+        let dbInstance = null;
+        let dbRef = null;
 
-        // Global State
-        let allMembers = [];
-        let allClaims = [];
-        let currentMemberId = null;
-        let isAdminLoggedIn = false;
-        let selectedAdminMemberId = null;
-        let previousStampCount = null;
+        if (isFirebaseConfigured) {
+            try {
+                const app = initializeApp(firebaseConfig);
+                dbInstance = getDatabase(app);
+                dbRef = ref(dbInstance, 'premiovaaps_loyalty_data');
+                document.getElementById('dbStatusBadge').classList.remove('hidden');
+            } catch (err) {
+                console.error("Firebase init error:", err);
+            }
+        }
 
-        // Admin Credentials (Strictly verified without exposing in UI)
-        const ADMIN_VALID_NAME = "Diahimaya";
-        const ADMIN_VALID_PASS = "3424Diah";
-        const ADMIN_WHATSAPP = "6289652985988"; // Format internasional untuk 089652985988
+        // ==================== KONFIGURASI KEAMANAN & STATE ====================
+        const LOCAL_BACKUP_KEY = 'premiovaaps_loyalty_db_v1';
+        const SESSION_KEY = 'premiovaaps_active_session_v1';
+        const WA_ADMIN_NUMBER = '6289652985988';
+        const ADMIN_USERNAME = 'Diahimaya';
 
-        // ==========================================
-        // 2. SECURITY & HELPER UTILITIES
-        // ==========================================
+        let appDB = { members: [], claims: [] };
 
-        // SHA-256 Password Hashing using Web Crypto API
-        async function hashPassword(password) {
+        function setLoading(isLoading) {
+            const el = document.getElementById('loadingOverlay');
+            if (isLoading) el.classList.remove('hidden');
+            else el.classList.add('hidden');
+        }
+
+        async function hashPassword(plainText) {
             const encoder = new TextEncoder();
-            const data = encoder.encode(password + "_PREMIOVAAPS_SALT_2026");
+            const data = encoder.encode(plainText);
             const hashBuffer = await crypto.subtle.digest('SHA-256', data);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        // Format Indonesian Date & Time
-        function formatDateIndo(isoString) {
-            if (!isoString) return '-';
+        let verifiedAdminHash = null;
+        (async () => {
+            verifiedAdminHash = await hashPassword('3424Diah');
+        })();
+
+        // ==================== SINKRONISASI CLOUD REAL-TIME ====================
+        async function loadInitialDB() {
+            const localRaw = localStorage.getItem(LOCAL_BACKUP_KEY);
+            if (localRaw) {
+                appDB = JSON.parse(localRaw);
+            }
+
+            if (isFirebaseConfigured && dbRef) {
+                setLoading(true);
+                try {
+                    const snapshot = await get(dbRef);
+                    if (snapshot.exists()) {
+                        const cloudData = snapshot.val();
+                        appDB = {
+                            members: cloudData.members || [],
+                            claims: cloudData.claims || []
+                        };
+                        localStorage.setItem(LOCAL_BACKUP_KEY, JSON.stringify(appDB));
+                    } else if (appDB.members.length > 0 || appDB.claims.length > 0) {
+                        await set(dbRef, appDB);
+                    }
+
+                    // Listener Real-time: otomatis update tampilan jika ada perubahan dari HP lain!
+                    onValue(dbRef, (snap) => {
+                        if (snap.exists()) {
+                            const updated = snap.val();
+                            appDB = {
+                                members: updated.members || [],
+                                claims: updated.claims || []
+                            };
+                            localStorage.setItem(LOCAL_BACKUP_KEY, JSON.stringify(appDB));
+                            renderApp();
+                        }
+                    });
+                } catch (e) {
+                    console.error("Gagal memuat dari Firebase:", e);
+                    showToast("Mode offline aktif (periksa koneksi atau konfigurasi Firebase).", "info");
+                } finally {
+                    setLoading(false);
+                }
+            }
+            renderApp();
+        }
+
+        async function saveDB(newDB) {
+            appDB = newDB;
+            localStorage.setItem(LOCAL_BACKUP_KEY, JSON.stringify(appDB));
+            if (isFirebaseConfigured && dbRef) {
+                try {
+                    await set(dbRef, appDB);
+                } catch (e) {
+                    console.error("Gagal menyimpan ke Firebase:", e);
+                    showToast("Gagal sinkronisasi ke cloud, tersimpan lokal.", "error");
+                }
+            }
+        }
+
+        window.syncFromCloud = async function(manual = false) {
+            if (!isFirebaseConfigured || !dbRef) {
+                if (manual) showToast("Database cloud belum dikonfigurasi.", "info");
+                return;
+            }
+            if (manual) setLoading(true);
+            try {
+                const snapshot = await get(dbRef);
+                if (snapshot.exists()) {
+                    const cloudData = snapshot.val();
+                    appDB = {
+                        members: cloudData.members || [],
+                        claims: cloudData.claims || []
+                    };
+                    localStorage.setItem(LOCAL_BACKUP_KEY, JSON.stringify(appDB));
+                    renderApp();
+                    if (manual) showToast("Data berhasil disinkronkan dari server!", "success");
+                }
+            } catch (e) {
+                if (manual) showToast("Gagal menyegarkan data.", "error");
+            } finally {
+                if (manual) setLoading(false);
+            }
+        };
+
+        // ==================== HELPER & NOTIFIKASI ====================
+        function formatDateTime(isoString) {
             const date = new Date(isoString);
             return date.toLocaleDateString('id-ID', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            }) + ' WIB';
+                day: '2-digit', month: 'short', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
         }
 
-        // Generate Unique Member ID (e.g., PRM-4829)
-        function generateMemberId() {
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            return `PRM-${randomNum}`;
+        function generateMemberId(existingMembers) {
+            let id;
+            do {
+                const rand = Math.floor(10000 + Math.random() * 90000);
+                id = `PRM-${rand}`;
+            } while (existingMembers.some(m => m.id === id));
+            return id;
         }
 
-        // Toast Notification Helper
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             const styles = {
-                success: 'bg-espresso text-gold-light border-gold',
-                error: 'bg-red-950 text-red-100 border-red-500',
-                info: 'bg-cocoa text-cream border-gold/60'
+                success: 'bg-espresso border-gold text-goldLight',
+                error: 'bg-red-950 border-red-400 text-red-100',
+                info: 'bg-chocolate border-gold/60 text-cream'
             };
-            const icons = {
-                success: 'fa-circle-check text-gold',
-                error: 'fa-circle-exclamation text-red-400',
-                info: 'fa-crown text-gold'
-            };
-
-            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3.5 rounded-2xl border shadow-xl fade-in-up ${styles[type] || styles.info}`;
-            toast.innerHTML = `
-                <i class="fa-solid ${icons[type] || icons.info} text-lg"></i>
-                <p class="text-xs sm:text-sm font-medium leading-snug">${message}</p>
-            `;
+            toast.className = `pointer-events-auto border-l-4 ${styles[type] || styles.info} px-4 py-3 rounded-xl shadow-2xl text-xs sm:text-sm font-medium animate-entry flex items-center justify-between gap-3`;
+            toast.innerHTML = `<span>${message}</span>`;
             container.appendChild(toast);
-
             setTimeout(() => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateY(-10px)';
@@ -689,935 +628,652 @@
             }, 3800);
         }
 
-        // Custom Modal Helper (Replaces browser alert/confirm/prompt)
-        function showCustomModal({ title, message, confirmText = 'Ya, Lanjutkan', cancelText = 'Batal', showInput = false, inputLabel = '', inputPlaceholder = '' }) {
-            return new Promise((resolve) => {
-                const modal = document.getElementById('custom-modal');
-                const titleEl = document.getElementById('modal-title');
-                const msgEl = document.getElementById('modal-message');
-                const inputWrap = document.getElementById('modal-input-wrapper');
-                const inputLabelEl = document.getElementById('modal-input-label');
-                const inputEl = document.getElementById('modal-input');
-                const confirmBtn = document.getElementById('modal-confirm-btn');
-                const cancelBtn = document.getElementById('modal-cancel-btn');
-
-                titleEl.textContent = title;
-                msgEl.textContent = message;
-                confirmBtn.textContent = confirmText;
-                cancelBtn.textContent = cancelText;
-
-                if (showInput) {
-                    inputWrap.classList.remove('hidden');
-                    inputLabelEl.textContent = inputLabel;
-                    inputEl.placeholder = inputPlaceholder;
-                    inputEl.value = '';
-                } else {
-                    inputWrap.classList.add('hidden');
+        // ==================== NAVIGASI & AUTH ====================
+        let logoTapCount = 0;
+        document.getElementById('brandLogoTrigger').addEventListener('click', () => {
+            logoTapCount++;
+            if (logoTapCount >= 5) {
+                logoTapCount = 0;
+                const session = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+                if (!session) {
+                    window.toggleAdminLogin(true);
+                    showToast('Mode akses khusus terbuka.', 'info');
                 }
-
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-
-                const cleanup = () => {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                    confirmBtn.onclick = null;
-                    cancelBtn.onclick = null;
-                };
-
-                confirmBtn.onclick = () => {
-                    if (showInput) {
-                        const val = inputEl.value.trim();
-                        if (!val) {
-                            showToast('Alasan wajib diisi sebelum melanjutkan!', 'error');
-                            return;
-                        }
-                        cleanup();
-                        resolve({ confirmed: true, value: val });
-                    } else {
-                        cleanup();
-                        resolve({ confirmed: true, value: null });
-                    }
-                };
-
-                cancelBtn.onclick = () => {
-                    cleanup();
-                    resolve({ confirmed: false, value: null });
-                };
-            });
-        }
-
-        // ==========================================
-        // 3. DATABASE INITIALIZATION & REALTIME SYNC
-        // ==========================================
-        async function initApp() {
-            try {
-                if (firebaseConfig) {
-                    const app = initializeApp(firebaseConfig);
-                    auth = getAuth(app);
-                    db = getFirestore(app);
-
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                    isFirebaseReady = true;
-                    setupFirestoreListeners();
-                } else {
-                    throw new Error("Konfigurasi database tidak ditemukan.");
-                }
-            } catch (err) {
-                console.error("Init error:", err);
-                showToast("Gagal menghubungkan ke server database.", "error");
-            } finally {
-                document.getElementById('view-loading').classList.add('hidden');
-                checkInitialRoute();
-            }
-        }
-
-        function setupFirestoreListeners() {
-            if (!isFirebaseReady || !auth.currentUser) return;
-
-            // Listener 1: All Members Collection (Strict Rule 1 Path, No Complex Queries)
-            const membersRef = collection(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_members');
-            onSnapshot(membersRef, (snapshot) => {
-                allMembers = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                if (currentMemberId) {
-                    renderMemberDashboard();
-                }
-                if (isAdminLoggedIn) {
-                    renderAdminDashboard();
-                }
-            }, (error) => {
-                console.error("Members listener error:", error);
-            });
-
-            // Listener 2: All Claims Collection
-            const claimsRef = collection(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_claims');
-            onSnapshot(claimsRef, (snapshot) => {
-                allClaims = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                // Sort newest first in memory
-                allClaims.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-                if (currentMemberId) {
-                    renderMemberDashboard();
-                }
-                if (isAdminLoggedIn) {
-                    renderAdminDashboard();
-                }
-            }, (error) => {
-                console.error("Claims listener error:", error);
-            });
-        }
-
-        // ==========================================
-        // 4. VIEW & NAVIGATION CONTROLLER
-        // ==========================================
-        function hideAllViews() {
-            ['view-member-auth', 'view-member-dashboard', 'view-admin-auth', 'view-admin-dashboard'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-        }
-
-        function updateNavbar() {
-            const nav = document.getElementById('nav-actions');
-            if (isAdminLoggedIn) {
-                nav.innerHTML = `
-                    <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/20 border border-gold/40 text-gold text-xs font-bold">
-                        <i class="fa-solid fa-shield-halved"></i> Mode Admin
-                    </span>
-                    <button type="button" onclick="logoutAdmin()" class="px-3.5 py-1.5 rounded-xl bg-red-900/60 hover:bg-red-800 text-red-100 border border-red-500/40 text-xs font-bold transition">
-                        Keluar <i class="fa-solid fa-right-from-bracket ml-1"></i>
-                    </button>
-                `;
-            } else if (currentMemberId) {
-                const member = allMembers.find(m => m.memberId === currentMemberId);
-                nav.innerHTML = `
-                    <span class="hidden sm:inline-block text-xs text-gold-light/80 mr-2">Halo, <strong class="text-gold">${member ? member.name : 'Member'}</strong></span>
-                    <button type="button" onclick="logoutMember()" class="px-3.5 py-1.5 rounded-xl bg-cocoa hover:bg-mocha text-gold-light border border-gold/30 text-xs font-bold transition">
-                        Keluar <i class="fa-solid fa-right-from-bracket ml-1"></i>
-                    </button>
-                `;
-            } else {
-                nav.innerHTML = `
-                    <span class="text-[11px] text-gold-light/70 italic hidden sm:inline">Loyalty Program</span>
-                `;
-            }
-        }
-
-        function checkInitialRoute() {
-            // Check URL hash if user navigates directly to #admin
-            if (window.location.hash === '#admin') {
-                openAdminAuthView();
-            } else {
-                openMemberAuthView();
-            }
-        }
-
-        window.openMemberAuthView = function() {
-            isAdminLoggedIn = false;
-            currentMemberId = null;
-            previousStampCount = null;
-            hideAllViews();
-            document.getElementById('view-member-auth').classList.remove('hidden');
-            updateNavbar();
-        };
-
-        window.openAdminAuthView = function() {
-            currentMemberId = null;
-            isAdminLoggedIn = false;
-            hideAllViews();
-            document.getElementById('admin-name-input').value = '';
-            document.getElementById('admin-pass-input').value = '';
-            document.getElementById('view-admin-auth').classList.remove('hidden');
-            updateNavbar();
-        };
-
-        // Secret 5-tap on Crown icon to open Admin Portal easily on mobile
-        let crownTapCount = 0;
-        let crownTapTimer = null;
-        document.getElementById('secret-crown-trigger').addEventListener('click', () => {
-            crownTapCount++;
-            clearTimeout(crownTapTimer);
-            crownTapTimer = setTimeout(() => { crownTapCount = 0; }, 1500);
-            if (crownTapCount >= 5) {
-                crownTapCount = 0;
-                openAdminAuthView();
             }
         });
 
         window.switchAuthTab = function(tab) {
-            const loginTab = document.getElementById('tab-login');
-            const regTab = document.getElementById('tab-register');
-            const loginForm = document.getElementById('form-member-login');
-            const regForm = document.getElementById('form-member-register');
+            const loginForm = document.getElementById('memberLoginForm');
+            const regForm = document.getElementById('memberRegisterForm');
+            const tabLogin = document.getElementById('tabLoginBtn');
+            const tabReg = document.getElementById('tabRegisterBtn');
 
             if (tab === 'login') {
-                loginTab.className = 'py-2 text-sm font-bold rounded-lg bg-espresso text-gold shadow transition';
-                regTab.className = 'py-2 text-sm font-semibold rounded-lg text-mocha hover:text-cocoa transition';
                 loginForm.classList.remove('hidden');
                 regForm.classList.add('hidden');
+                tabLogin.className = 'py-2 rounded-lg text-sm font-semibold bg-gradient-to-r from-gold to-goldDark text-espresso shadow transition-all';
+                tabReg.className = 'py-2 rounded-lg text-sm font-semibold text-cream/70 hover:text-cream transition-all';
             } else {
-                regTab.className = 'py-2 text-sm font-bold rounded-lg bg-espresso text-gold shadow transition';
-                loginTab.className = 'py-2 text-sm font-semibold rounded-lg text-mocha hover:text-cocoa transition';
-                regForm.classList.remove('hidden');
                 loginForm.classList.add('hidden');
+                regForm.classList.remove('hidden');
+                tabReg.className = 'py-2 rounded-lg text-sm font-semibold bg-gradient-to-r from-gold to-goldDark text-espresso shadow transition-all';
+                tabLogin.className = 'py-2 rounded-lg text-sm font-semibold text-cream/70 hover:text-cream transition-all';
             }
         };
 
-        // ==========================================
-        // 5. MEMBER REGISTRATION & LOGIN
-        // ==========================================
-        document.getElementById('form-member-register').addEventListener('submit', async (e) => {
+        window.toggleAdminLogin = function(showAdmin) {
+            const memberCard = document.getElementById('memberAuthCard');
+            const adminCard = document.getElementById('adminAuthCard');
+            if (showAdmin) {
+                memberCard.classList.add('hidden');
+                adminCard.classList.remove('hidden');
+                document.getElementById('adminNameInput').focus();
+            } else {
+                adminCard.classList.add('hidden');
+                memberCard.classList.remove('hidden');
+            }
+        };
+
+        window.handleMemberRegister = async function(e) {
             e.preventDefault();
-            if (!isFirebaseReady || !auth.currentUser) {
-                showToast("Koneksi database belum siap, coba sesaat lagi.", "error");
+            const name = document.getElementById('regName').value.trim();
+            const password = document.getElementById('regPassword').value;
+
+            if (name.toLowerCase() === ADMIN_USERNAME.toLowerCase()) {
+                showToast('Nama tersebut tidak tersedia untuk pendaftaran member.', 'error');
                 return;
             }
 
-            const nameInput = document.getElementById('reg-name').value.trim();
-            const passInput = document.getElementById('reg-pass').value;
-            const confirmInput = document.getElementById('reg-pass-confirm').value;
+            setLoading(true);
+            await window.syncFromCloud(false);
 
-            if (passInput !== confirmInput) {
-                showToast("Konfirmasi password tidak cocok!", "error");
-                return;
-            }
-
-            // Check if name already exists (case-insensitive)
-            const exists = allMembers.some(m => m.name.toLowerCase() === nameInput.toLowerCase());
+            const exists = appDB.members.some(m => m.name.toLowerCase() === name.toLowerCase());
             if (exists) {
-                showToast("Nama member sudah terdaftar. Silakan masuk atau gunakan nama lain.", "error");
+                setLoading(false);
+                showToast('Nama akun sudah terdaftar. Silakan langsung masuk.', 'error');
+                window.switchAuthTab('login');
                 return;
             }
 
-            try {
-                const passwordHash = await hashPassword(passInput);
-                let newMemberId = generateMemberId();
-                while (allMembers.some(m => m.memberId === newMemberId)) {
-                    newMemberId = generateMemberId();
-                }
+            const passHash = await hashPassword(password);
+            const newMember = {
+                id: generateMemberId(appDB.members),
+                name: name,
+                passwordHash: passHash,
+                stamps: [],
+                notifications: [],
+                createdAt: new Date().toISOString()
+            };
 
-                const newMemberData = {
-                    memberId: newMemberId,
-                    name: nameInput,
-                    passwordHash: passwordHash,
-                    stamps: 0,
-                    stampHistory: [],
-                    createdAt: new Date().toISOString()
-                };
+            appDB.members.push(newMember);
+            await saveDB(appDB);
+            setLoading(false);
 
-                const memberDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_members', newMemberId);
-                await setDoc(memberDocRef, newMemberData);
-
-                showToast(`Selamat bergabung, ${nameInput}! Kartu VIP Anda berhasil dibuat.`, "success");
-                document.getElementById('form-member-register').reset();
-
-                // Auto login after registration
-                currentMemberId = newMemberId;
-                previousStampCount = 0;
-                hideAllViews();
-                document.getElementById('view-member-dashboard').classList.remove('hidden');
-                updateNavbar();
-                renderMemberDashboard();
-            } catch (err) {
-                console.error("Register error:", err);
-                showToast("Terjadi kesalahan saat mendaftarkan akun.", "error");
-            }
-        });
-
-        document.getElementById('form-member-login').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!isFirebaseReady || !auth.currentUser) {
-                showToast("Koneksi database belum siap.", "error");
-                return;
-            }
-
-            const nameInput = document.getElementById('login-name').value.trim();
-            const passInput = document.getElementById('login-pass').value;
-
-            try {
-                const passwordHash = await hashPassword(passInput);
-                const matchedMember = allMembers.find(
-                    m => m.name.toLowerCase() === nameInput.toLowerCase() && m.passwordHash === passwordHash
-                );
-
-                if (!matchedMember) {
-                    showToast("Nama member atau password salah!", "error");
-                    return;
-                }
-
-                currentMemberId = matchedMember.memberId;
-                previousStampCount = matchedMember.stamps || 0;
-                document.getElementById('form-member-login').reset();
-
-                showToast(`Selamat datang kembali, ${matchedMember.name}!`, "success");
-                hideAllViews();
-                document.getElementById('view-member-dashboard').classList.remove('hidden');
-                updateNavbar();
-                renderMemberDashboard();
-            } catch (err) {
-                console.error("Login error:", err);
-                showToast("Gagal memproses login.", "error");
-            }
-        });
-
-        window.logoutMember = function() {
-            currentMemberId = null;
-            previousStampCount = null;
-            showToast("Anda telah keluar dari akun member.", "info");
-            openMemberAuthView();
+            localStorage.setItem(SESSION_KEY, JSON.stringify({ role: 'member', memberId: newMember.id }));
+            showToast(`Pendaftaran berhasil! ID Member Anda: ${newMember.id}`, 'success');
+            e.target.reset();
+            renderApp();
         };
 
-        // ==========================================
-        // 6. RENDER MEMBER DASHBOARD & REWARD CLAIM
-        // ==========================================
-        function renderMemberDashboard() {
-            const member = allMembers.find(m => m.memberId === currentMemberId);
-            if (!member) return;
+        window.handleMemberLogin = async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('loginName').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            setLoading(true);
+            await window.syncFromCloud(false);
+            const passHash = await hashPassword(password);
 
-            updateNavbar();
+            const member = appDB.members.find(
+                m => m.name.toLowerCase() === name.toLowerCase() && m.passwordHash === passHash
+            );
+            setLoading(false);
 
-            // Basic Card Info
-            document.getElementById('card-member-name').textContent = member.name;
-            document.getElementById('card-member-id').textContent = member.memberId;
-            const currentStamps = Number(member.stamps || 0);
-            document.getElementById('card-stamp-count').textContent = currentStamps;
-
-            // Detect new stamp animation trigger
-            const gotNewStamp = previousStampCount !== null && currentStamps > previousStampCount;
-            if (gotNewStamp) {
-                showToast("Selamat! Anda mendapatkan +1 stempel PREMIOVAAPS!", "success");
-                if (typeof confetti === 'function') {
-                    confetti({ particleCount: 55, spread: 60, origin: { y: 0.6 }, colors: ['#D4AF37', '#FFF3B0', '#4A2C2A'] });
-                }
+            if (!member) {
+                showToast('Nama akun atau password salah.', 'error');
+                return;
             }
-            previousStampCount = currentStamps;
 
-            // Render 10 Stamp Slots
-            const stampsGrid = document.getElementById('stamps-grid');
-            stampsGrid.innerHTML = '';
-            for (let i = 1; i <= 10; i++) {
-                const isStamped = i <= currentStamps;
-                const isNewlyAdded = gotNewStamp && i === currentStamps;
+            localStorage.setItem(SESSION_KEY, JSON.stringify({ role: 'member', memberId: member.id }));
+            showToast(`Selamat datang kembali, ${member.name}!`, 'success');
+            e.target.reset();
+            renderApp();
+        };
 
-                const slot = document.createElement('div');
-                slot.className = `relative h-20 sm:h-24 rounded-2xl border flex flex-col items-center justify-center p-2 transition-all ${
-                    isStamped
-                        ? 'bg-espresso/90 border-gold shadow-inner'
-                        : 'bg-espresso/40 border-dashed border-gold/30'
-                }`;
+        window.handleAdminLogin = async function(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('adminNameInput').value.trim();
+            const passInput = document.getElementById('adminPassInput').value;
+            const inputHash = await hashPassword(passInput);
+            const targetHash = verifiedAdminHash || await hashPassword('3424Diah');
 
-                if (isStamped) {
-                    slot.innerHTML = `
-                        <div class="stamp-seal w-14 h-14 sm:w-16 sm:h-16 rounded-full flex flex-col items-center justify-center text-espresso select-none ${isNewlyAdded ? 'stamp-animated' : ''}">
-                            <i class="fa-solid fa-crown text-[10px] sm:text-xs mb-0.5"></i>
-                            <span class="font-serif font-extrabold text-[8px] sm:text-[9px] tracking-tighter leading-none">PREMIOVAAPS</span>
-                            <span class="text-[7px] font-bold uppercase tracking-widest mt-0.5">VIP #${i}</span>
+            if (nameInput === ADMIN_USERNAME && inputHash === targetHash) {
+                localStorage.setItem(SESSION_KEY, JSON.stringify({ role: 'admin' }));
+                showToast('Akses Admin terverifikasi.', 'success');
+                e.target.reset();
+                renderApp();
+            } else {
+                showToast('Kredensial Admin tidak valid.', 'error');
+            }
+        };
+
+        window.logout = function() {
+            localStorage.removeItem(SESSION_KEY);
+            window.toggleAdminLogin(false);
+            showToast('Anda telah keluar dari sesi.', 'info');
+            renderApp();
+        };
+
+        // ==================== RENDER MEMBER DASHBOARD ====================
+        function renderMemberDashboard(memberId) {
+            const member = appDB.members.find(m => m.id === memberId);
+            if (!member) {
+                window.logout();
+                return;
+            }
+
+            const stamps = member.stamps || [];
+            document.getElementById('cardMemberName').textContent = member.name;
+            document.getElementById('cardMemberId').textContent = member.id;
+
+            const stampCount = stamps.length;
+            document.getElementById('stampCountText').textContent = stampCount;
+            document.getElementById('stampProgressBar').style.width = `${Math.min((stampCount / 10) * 100, 100)}%`;
+
+            // Notifikasi Member
+            const notifArea = document.getElementById('memberNotificationArea');
+            const unreadNotifs = (member.notifications || []).filter(n => !n.read);
+            if (unreadNotifs.length > 0) {
+                notifArea.innerHTML = unreadNotifs.map(n => {
+                    const isApproved = n.type === 'approved';
+                    const boxStyle = isApproved
+                        ? 'bg-emerald-950/90 border-emerald-400 text-emerald-100'
+                        : 'bg-red-950/90 border-red-400 text-red-100';
+                    const icon = isApproved ? '✅' : '❌';
+                    return `
+                        <div class="p-4 rounded-2xl border ${boxStyle} flex items-start justify-between gap-4 shadow-lg animate-entry">
+                            <div class="flex items-start gap-3">
+                                <span class="text-xl">${icon}</span>
+                                <div>
+                                    <h4 class="font-bold text-sm">${n.title}</h4>
+                                    <p class="text-xs mt-1 opacity-90">${n.message}</p>
+                                    <span class="text-[10px] opacity-60 block mt-1">${formatDateTime(n.date)}</span>
+                                </div>
+                            </div>
+                            <button onclick="dismissMemberNotification('${member.id}', '${n.id}')" class="text-xs px-2.5 py-1 rounded-lg bg-black/30 hover:bg-black/50 shrink-0">
+                                Tutup
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                notifArea.innerHTML = '';
+            }
+
+            // Render 10 Slot Stempel
+            const stampsGrid = document.getElementById('stampsGrid');
+            let slotsHTML = '';
+            for (let i = 0; i < 10; i++) {
+                const stamp = stamps[i];
+                if (stamp) {
+                    const shortDate = new Date(stamp.date).toLocaleDateString('id-ID', { day: '2-digit', month: 'short' });
+                    slotsHTML += `
+                        <div class="aspect-square rounded-2xl bg-espresso/90 border border-gold/60 flex flex-col items-center justify-center p-2 relative shadow-inner">
+                            <div class="stamp-seal animate-stamp w-full h-full rounded-full flex flex-col items-center justify-center text-center p-1">
+                                <span class="text-[9px] text-goldLight tracking-widest uppercase">★ VIP ★</span>
+                                <span class="font-serif font-extrabold text-[10px] sm:text-[11px] text-gold tracking-tight leading-tight my-0.5">PREMIOVAAPS</span>
+                                <span class="text-[9px] text-cream/90 font-medium">${shortDate}</span>
+                            </div>
                         </div>
                     `;
                 } else {
-                    slot.innerHTML = `
-                        <span class="font-serif text-sm font-bold text-gold/30">${i}</span>
-                        <span class="text-[9px] uppercase tracking-wider text-gold-light/30 mt-0.5">Stempel</span>
-                    `;
-                }
-                stampsGrid.appendChild(slot);
-            }
-
-            // Check Member's Claims
-            const memberClaims = allClaims.filter(c => c.memberId === member.memberId);
-            const pendingClaim = memberClaims.find(c => c.status === 'PENDING');
-            const latestDecisionClaim = memberClaims.find(c => c.status === 'DISETUJUI' || c.status === 'DITOLAK');
-
-            // Render Admin Decision Notification Banner
-            const notifArea = document.getElementById('member-notification-area');
-            if (latestDecisionClaim && !latestDecisionClaim.dismissedByMember) {
-                notifArea.classList.remove('hidden');
-                if (latestDecisionClaim.status === 'DISETUJUI') {
-                    notifArea.innerHTML = `
-                        <div class="bg-emerald-950 text-emerald-50 border-2 border-emerald-400 rounded-2xl p-4 sm:p-5 shadow-lg flex items-start justify-between gap-3 fade-in-up">
-                            <div class="flex items-start gap-3">
-                                <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 mt-0.5">
-                                    <i class="fa-solid fa-circle-check text-lg"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-emerald-300">Selamat! Hadiah Berhasil Diklaim</h4>
-                                    <p class="text-xs sm:text-sm text-emerald-100 mt-1">
-                                        Pengajuan hadiah <strong>${latestDecisionClaim.reward}</strong> Anda telah <strong>DISETUJUI</strong> oleh admin pada ${formatDateIndo(latestDecisionClaim.processedAt)}. Kartu stempel Anda telah direset ke 0 untuk periode berikutnya!
-                                    </p>
-                                </div>
-                            </div>
-                            <button type="button" onclick="dismissMemberNotification('${latestDecisionClaim.id}')" class="text-emerald-300 hover:text-white p-1" title="Tutup notifikasi">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                    `;
-                } else if (latestDecisionClaim.status === 'DITOLAK') {
-                    notifArea.innerHTML = `
-                        <div class="bg-red-950 text-red-50 border-2 border-red-400 rounded-2xl p-4 sm:p-5 shadow-lg flex items-start justify-between gap-3 fade-in-up">
-                            <div class="flex items-start gap-3">
-                                <div class="w-9 h-9 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center shrink-0 mt-0.5">
-                                    <i class="fa-solid fa-circle-xmark text-lg"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-red-300">Pengajuan Klaim Hadiah Ditolak</h4>
-                                    <p class="text-xs sm:text-sm text-red-100 mt-1">
-                                        Klaim hadiah <strong>${latestDecisionClaim.reward}</strong> ditolak oleh admin.
-                                    </p>
-                                    <p class="text-xs bg-red-900/70 border border-red-400/30 rounded-lg px-3 py-2 mt-2 text-red-100">
-                                        <strong>Alasan Penolakan:</strong> ${latestDecisionClaim.rejectReason || '-'}
-                                    </p>
-                                </div>
-                            </div>
-                            <button type="button" onclick="dismissMemberNotification('${latestDecisionClaim.id}')" class="text-red-300 hover:text-white p-1" title="Tutup notifikasi">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                    `;
-                }
-            } else {
-                notifArea.classList.add('hidden');
-            }
-
-            // Reward Buttons State
-            const rewardBtns = document.querySelectorAll('.reward-option-btn');
-            const lockBadge = document.getElementById('reward-lock-badge');
-            const rewardSubtitle = document.getElementById('reward-subtitle');
-            const pendingBox = document.getElementById('pending-claim-box');
-
-            if (pendingClaim) {
-                // Already submitted a claim, waiting for admin approval
-                lockBadge.className = 'px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold border border-amber-300';
-                lockBadge.innerHTML = '<i class="fa-solid fa-hourglass-half mr-1"></i> Menunggu Admin';
-                rewardSubtitle.textContent = 'Pengajuan klaim sudah terkirim. Silakan tunggu konfirmasi admin.';
-
-                rewardBtns.forEach(btn => {
-                    btn.disabled = true;
-                    btn.className = 'reward-option-btn group relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-parchment bg-cream/60 text-center transition opacity-50 cursor-not-allowed';
-                });
-
-                pendingBox.classList.remove('hidden');
-                document.getElementById('pending-reward-name').textContent = pendingClaim.reward;
-                document.getElementById('btn-resend-wa').onclick = () => openWhatsAppClaim(member, pendingClaim.reward);
-            } else if (currentStamps >= 10) {
-                // Unlocked! Ready to claim
-                pendingBox.classList.add('hidden');
-                lockBadge.className = 'px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-300 animate-pulse';
-                lockBadge.innerHTML = '<i class="fa-solid fa-unlock mr-1"></i> Siap Diklaim!';
-                rewardSubtitle.textContent = 'Selamat! 10 stempel terkumpul. Tekan salah satu hadiah di bawah untuk klaim via WhatsApp:';
-
-                rewardBtns.forEach(btn => {
-                    btn.disabled = false;
-                    btn.className = 'reward-option-btn group relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gold bg-cream hover:bg-gold/15 text-center transition cursor-pointer shadow-sm hover:shadow-md';
-                });
-            } else {
-                // Locked (< 10 stamps)
-                pendingBox.classList.add('hidden');
-                lockBadge.className = 'px-3 py-1 rounded-full bg-parchment text-mocha text-xs font-bold border border-latte/30';
-                lockBadge.innerHTML = `<i class="fa-solid fa-lock mr-1"></i> Kurang ${10 - currentStamps} Stempel`;
-                rewardSubtitle.textContent = 'Kumpulkan 10 stempel untuk membuka kunci pilihan hadiah gratis!';
-
-                rewardBtns.forEach(btn => {
-                    btn.disabled = true;
-                    btn.className = 'reward-option-btn group relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-parchment bg-cream/60 text-center transition opacity-60 cursor-not-allowed';
-                });
-            }
-
-            // Render Stamp History
-            const stampHistContainer = document.getElementById('member-stamp-history');
-            const historyArr = Array.isArray(member.stampHistory) ? [...member.stampHistory].reverse() : [];
-            if (historyArr.length === 0) {
-                stampHistContainer.innerHTML = `<p class="text-xs text-latte italic py-4 text-center">Belum ada riwayat pemberian stempel.</p>`;
-            } else {
-                stampHistContainer.innerHTML = historyArr.map((item, idx) => `
-                    <div class="flex items-center justify-between p-3 rounded-xl bg-cream border border-latte/15 text-xs">
-                        <div class="flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-espresso text-gold font-bold flex items-center justify-center text-[10px]">
-                                <i class="fa-solid fa-stamp"></i>
+                    const isTenth = i === 9;
+                    slotsHTML += `
+                        <div class="aspect-square rounded-2xl bg-espresso/45 border border-dashed ${isTenth ? 'border-gold/60' : 'border-gold/25'} flex flex-col items-center justify-center p-2 text-center">
+                            <span class="font-serif text-lg sm:text-xl font-bold ${isTenth ? 'text-gold' : 'text-cream/25'}">${i + 1}</span>
+                            <span class="text-[10px] ${isTenth ? 'text-goldLight font-semibold' : 'text-cream/25'} mt-0.5">
+                                ${isTenth ? 'FREE GIFT' : 'STEMPEL'}
                             </span>
-                            <div>
-                                <p class="font-bold text-cocoa">${item.note || 'Pembelian Aplikasi Premium'}</p>
-                                <p class="text-[11px] text-latte">${formatDateIndo(item.date)}</p>
-                            </div>
                         </div>
-                        <span class="font-bold text-gold-dark">+1</span>
+                    `;
+                }
+            }
+            stampsGrid.innerHTML = slotsHTML;
+
+            // Cek Klaim Hadiah
+            const rewardSection = document.getElementById('rewardClaimSection');
+            const pendingBanner = document.getElementById('pendingClaimBanner');
+            const rewardBtns = document.getElementById('rewardButtonsGrid');
+            const pendingClaim = appDB.claims.find(c => c.memberId === member.id && c.status === 'PENDING');
+
+            if (stampCount >= 10) {
+                rewardSection.classList.remove('hidden');
+                if (pendingClaim) {
+                    pendingBanner.classList.remove('hidden');
+                    document.getElementById('pendingRewardName').textContent = pendingClaim.reward;
+                    rewardBtns.classList.add('opacity-50', 'pointer-events-none');
+                } else {
+                    pendingBanner.classList.add('hidden');
+                    rewardBtns.classList.remove('opacity-50', 'pointer-events-none');
+                }
+            } else {
+                rewardSection.classList.add('hidden');
+            }
+
+            // Riwayat Stempel
+            const stampHistoryEl = document.getElementById('memberStampHistory');
+            if (stamps.length === 0) {
+                stampHistoryEl.innerHTML = '<p class="text-cream/50 text-xs italic">Belum ada stempel yang terkumpul.</p>';
+            } else {
+                stampHistoryEl.innerHTML = [...stamps].reverse().map((s, idx) => `
+                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-espresso/70 border border-gold/15">
+                        <div>
+                            <span class="text-xs font-semibold text-goldLight">Stempel #${stamps.length - idx}</span>
+                            <p class="text-[11px] text-cream/70">${s.note || 'Pembelian Aplikasi Premium'}</p>
+                        </div>
+                        <span class="text-[11px] text-cream/60 font-mono">${formatDateTime(s.date)}</span>
                     </div>
                 `).join('');
             }
 
-            // Render Claim History
-            const claimHistContainer = document.getElementById('member-claim-history');
+            // Riwayat Klaim
+            const memberClaims = appDB.claims.filter(c => c.memberId === member.id);
+            const claimHistoryEl = document.getElementById('memberClaimHistory');
             if (memberClaims.length === 0) {
-                claimHistContainer.innerHTML = `<p class="text-xs text-latte italic py-4 text-center">Belum ada riwayat klaim hadiah.</p>`;
+                claimHistoryEl.innerHTML = '<p class="text-cream/50 text-xs italic">Belum ada riwayat klaim hadiah.</p>';
             } else {
-                claimHistContainer.innerHTML = memberClaims.map(claim => {
-                    let badgeClass = 'bg-amber-100 text-amber-800';
-                    if (claim.status === 'DISETUJUI') badgeClass = 'bg-emerald-100 text-emerald-800';
-                    if (claim.status === 'DITOLAK') badgeClass = 'bg-red-100 text-red-800';
-
+                claimHistoryEl.innerHTML = [...memberClaims].reverse().map(c => {
+                    let badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">MENUNGGU</span>';
+                    if (c.status === 'APPROVED') {
+                        badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">DISETUJUI</span>';
+                    } else if (c.status === 'REJECTED') {
+                        badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-300 border border-red-500/40">DITOLAK</span>';
+                    }
                     return `
-                        <div class="p-3 rounded-xl bg-cream border border-latte/15 text-xs space-y-1">
+                        <div class="p-2.5 rounded-xl bg-espresso/70 border border-gold/15 space-y-1">
                             <div class="flex items-center justify-between">
-                                <span class="font-bold text-cocoa">${claim.reward}</span>
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeClass}">${claim.status}</span>
+                                <span class="font-bold text-xs text-cream">${c.reward}</span>
+                                ${badge}
                             </div>
-                            <p class="text-[11px] text-latte">Tanggal Klaim: ${formatDateIndo(claim.createdAt)}</p>
-                            ${claim.status === 'DITOLAK' && claim.rejectReason ? `<p class="text-[11px] text-red-700 font-medium">Alasan: ${claim.rejectReason}</p>` : ''}
+                            <p class="text-[11px] text-cream/60">Diajukan: ${formatDateTime(c.claimDate)}</p>
+                            ${c.status === 'REJECTED' && c.rejectReason ? `<p class="text-[11px] text-red-300 bg-red-950/50 p-1.5 rounded">Alasan: ${c.rejectReason}</p>` : ''}
                         </div>
                     `;
                 }).join('');
             }
         }
 
-        // Member Selects & Claims Reward -> Records in DB & Opens WhatsApp
-        window.selectAndClaimReward = async function(rewardName) {
-            const member = allMembers.find(m => m.memberId === currentMemberId);
-            if (!member || Number(member.stamps) < 10) {
-                showToast("Stempel Anda belum mencukupi 10 stempel.", "error");
+        window.dismissMemberNotification = async function(memberId, notifId) {
+            const member = appDB.members.find(m => m.id === memberId);
+            if (member && member.notifications) {
+                const notif = member.notifications.find(n => n.id === notifId);
+                if (notif) notif.read = true;
+                await saveDB(appDB);
+                renderMemberDashboard(memberId);
+            }
+        };
+
+        window.claimReward = async function(rewardName) {
+            const session = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+            if (!session || session.role !== 'member') return;
+
+            const member = appDB.members.find(m => m.id === session.memberId);
+            const stamps = member ? (member.stamps || []) : [];
+            if (!member || stamps.length < 10) {
+                showToast('Stempel Anda belum mencapai 10.', 'error');
                 return;
             }
 
-            // Prevent duplicate pending claims
-            const hasPending = allClaims.some(c => c.memberId === member.memberId && c.status === 'PENDING');
-            if (hasPending) {
-                showToast("Anda masih memiliki pengajuan klaim yang sedang diproses admin.", "info");
+            const existingPending = appDB.claims.find(c => c.memberId === member.id && c.status === 'PENDING');
+            if (existingPending) {
+                showToast('Anda masih memiliki pengajuan klaim yang sedang diproses.', 'info');
                 return;
             }
 
-            const { confirmed } = await showCustomModal({
-                title: 'Konfirmasi Klaim Hadiah',
-                message: `Anda memilih hadiah "${rewardName}". Pengajuan akan dicatat dan diarahkan ke WhatsApp Admin PREMIOVAAPS. Kartu belum direset sebelum admin menyetujui klaim. Lanjutkan?`,
-                confirmText: 'Klaim & Buka WhatsApp'
-            });
+            const now = new Date().toISOString();
+            const claimRecord = {
+                id: 'CLM-' + Date.now(),
+                memberId: member.id,
+                memberName: member.name,
+                reward: rewardName,
+                stampCountSnapshot: stamps.length,
+                stampDatesSnapshot: stamps.map(s => formatDateTime(s.date)),
+                claimDate: now,
+                status: 'PENDING',
+                resolvedDate: null,
+                rejectReason: ''
+            };
 
-            if (!confirmed) return;
+            appDB.claims.push(claimRecord);
+            await saveDB(appDB);
 
-            try {
-                const claimsRef = collection(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_claims');
-                await addDoc(claimsRef, {
-                    memberId: member.memberId,
-                    memberName: member.name,
-                    reward: rewardName,
-                    stampsProof: member.stamps,
-                    status: 'PENDING',
-                    createdAt: new Date().toISOString(),
-                    processedAt: null,
-                    rejectReason: null,
-                    dismissedByMember: false
-                });
+            const waText =
+`Halo Admin *PREMIOVAAPS* 👑
+Saya ingin mengajukan klaim hadiah Loyalty Card:
 
-                if (typeof confetti === 'function') {
-                    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 }, colors: ['#D4AF37', '#FFF3B0', '#2C1810'] });
-                }
+• *Nama Member:* ${member.name}
+• *ID Member:* ${member.id}
+• *Hadiah Pilihan:* ${rewardName}
+• *Bukti Koleksi:* 10 / 10 Stempel Lengkap
+• *Tanggal Klaim:* ${formatDateTime(now)}
 
-                showToast("Pengajuan klaim berhasil dibuat! Mengalihkan ke WhatsApp...", "success");
-                openWhatsAppClaim(member, rewardName);
-            } catch (err) {
-                console.error("Claim error:", err);
-                showToast("Gagal mengajukan klaim hadiah.", "error");
-            }
+Mohon verifikasi dan persetujuannya. Terima kasih!`;
+
+            const waUrl = `https://wa.me/${WA_ADMIN_NUMBER}?text=${encodeURIComponent(waText)}`;
+            
+            renderMemberDashboard(member.id);
+            showToast('Pengajuan klaim tercatat! Mengarahkan ke WhatsApp Admin...', 'success');
+            
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+            }, 600);
         };
 
-        function openWhatsAppClaim(member, rewardName) {
-            const message = `Halo Admin *PREMIOVAAPS*! Saya ingin mengajukan klaim hadiah Loyalty Card:\n\n` +
-                `• *Nama Member:* ${member.name}\n` +
-                `• *ID Member:* ${member.memberId}\n` +
-                `• *Hadiah Pilihan:* ${rewardName}\n` +
-                `• *Bukti Stempel:* ${member.stamps} / 10 Stempel Terkumpul\n\n` +
-                `Mohon diproses ya Admin. Terima kasih!`;
+        // ==================== RENDER ADMIN DASHBOARD ====================
+        window.renderAdminDashboard = function() {
+            const searchQuery = (document.getElementById('adminSearchInput').value || '').toLowerCase().trim();
 
-            const waUrl = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(message)}`;
-            window.open(waUrl, '_blank');
-        }
+            document.getElementById('statTotalMembers').textContent = appDB.members.length;
+            const pendingClaims = appDB.claims.filter(c => c.status === 'PENDING');
+            document.getElementById('statPendingClaims').textContent = pendingClaims.length;
 
-        window.dismissMemberNotification = async function(claimId) {
-            try {
-                const claimDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_claims', claimId);
-                await updateDoc(claimDocRef, { dismissedByMember: true });
-            } catch (err) {
-                console.error("Dismiss error:", err);
-            }
-        };
-
-        // ==========================================
-        // 7. SEPARATE ADMIN PORTAL & ACTIONS
-        // ==========================================
-        document.getElementById('form-admin-login').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const nameInput = document.getElementById('admin-name-input').value.trim();
-            const passInput = document.getElementById('admin-pass-input').value;
-
-            if (nameInput === ADMIN_VALID_NAME && passInput === ADMIN_VALID_PASS) {
-                isAdminLoggedIn = true;
-                currentMemberId = null;
-                document.getElementById('form-admin-login').reset();
-                showToast("Login Admin berhasil. Selamat datang di Dashboard PREMIOVAAPS.", "success");
-
-                hideAllViews();
-                document.getElementById('view-admin-dashboard').classList.remove('hidden');
-                updateNavbar();
-                renderAdminDashboard();
+            // 1. Pengajuan Klaim Pending
+            const claimsListEl = document.getElementById('adminClaimsList');
+            if (pendingClaims.length === 0) {
+                claimsListEl.innerHTML = '<p class="text-sm text-cream/50 italic">Tidak ada pengajuan klaim yang menunggu persetujuan.</p>';
             } else {
-                showToast("Akses ditolak! Nama atau password admin tidak valid.", "error");
-            }
-        });
-
-        window.logoutAdmin = function() {
-            isAdminLoggedIn = false;
-            selectedAdminMemberId = null;
-            showToast("Anda telah keluar dari Portal Admin.", "info");
-            openMemberAuthView();
-        };
-
-        window.switchAdminTab = function(tab) {
-            const tabMembers = document.getElementById('admin-tab-members');
-            const tabClaims = document.getElementById('admin-tab-claims');
-            const panelMembers = document.getElementById('admin-panel-members');
-            const panelClaims = document.getElementById('admin-panel-claims');
-
-            if (tab === 'members') {
-                tabMembers.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-espresso text-gold shadow transition';
-                tabClaims.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold text-mocha hover:text-cocoa transition relative';
-                panelMembers.classList.remove('hidden');
-                panelClaims.classList.add('hidden');
-            } else {
-                tabClaims.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-espresso text-gold shadow transition relative';
-                tabMembers.className = 'flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold text-mocha hover:text-cocoa transition';
-                panelClaims.classList.remove('hidden');
-                panelMembers.classList.add('hidden');
-            }
-        };
-
-        document.getElementById('admin-search-input').addEventListener('input', () => {
-            if (isAdminLoggedIn) renderAdminDashboard();
-        });
-
-        function renderAdminDashboard() {
-            if (!isAdminLoggedIn) return;
-
-            // Update Stats
-            const pendingCount = allClaims.filter(c => c.status === 'PENDING').length;
-            const approvedCount = allClaims.filter(c => c.status === 'DISETUJUI').length;
-            const totalActiveStamps = allMembers.reduce((sum, m) => sum + Number(m.stamps || 0), 0);
-
-            document.getElementById('stat-total-members').textContent = allMembers.length;
-            document.getElementById('stat-pending-claims').textContent = pendingCount;
-            document.getElementById('stat-approved-claims').textContent = approvedCount;
-            document.getElementById('stat-active-stamps').textContent = totalActiveStamps;
-
-            const badgePending = document.getElementById('badge-pending-count');
-            if (pendingCount > 0) {
-                badgePending.textContent = pendingCount;
-                badgePending.classList.remove('hidden');
-            } else {
-                badgePending.classList.add('hidden');
+                claimsListEl.innerHTML = pendingClaims.map(c => `
+                    <div class="p-4 rounded-xl bg-espresso border border-gold/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 rounded bg-gold text-espresso font-bold text-xs">${c.reward}</span>
+                                <span class="text-xs font-mono text-goldLight">${c.memberId}</span>
+                            </div>
+                            <p class="font-bold text-base text-cream">${c.memberName}</p>
+                            <p class="text-xs text-cream/70">Bukti: <strong>${c.stampCountSnapshot} Stempel</strong> • Waktu Klaim: ${formatDateTime(c.claimDate)}</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button onclick="approveClaim('${c.id}')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition shadow">
+                                ✓ DISETUJUI
+                            </button>
+                            <button onclick="openRejectModal('${c.id}')" class="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs transition shadow">
+                                ✕ DITOLAK
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
             }
 
-            // Filter Members by Search Query
-            const query = document.getElementById('admin-search-input').value.trim().toLowerCase();
-            const filteredMembers = allMembers.filter(m =>
-                m.name.toLowerCase().includes(query) || m.memberId.toLowerCase().includes(query)
+            // 2. Daftar Member
+            const filteredMembers = appDB.members.filter(m =>
+                m.name.toLowerCase().includes(searchQuery) || m.id.toLowerCase().includes(searchQuery)
             );
 
-            // Render Members List
-            const listContainer = document.getElementById('admin-members-list');
+            const membersListEl = document.getElementById('adminMembersList');
             if (filteredMembers.length === 0) {
-                listContainer.innerHTML = `<p class="text-xs text-latte text-center py-6">Tidak ada member yang sesuai pencarian.</p>`;
+                membersListEl.innerHTML = '<p class="text-sm text-cream/50 italic col-span-2">Member tidak ditemukan.</p>';
             } else {
-                listContainer.innerHTML = filteredMembers.map(m => {
-                    const isSelected = m.memberId === selectedAdminMemberId;
+                membersListEl.innerHTML = filteredMembers.map(m => {
+                    const stamps = m.stamps || [];
+                    const count = stamps.length;
+                    const isFull = count >= 10;
                     return `
-                        <button type="button" onclick="selectAdminMember('${m.memberId}')"
-                            class="w-full text-left p-3.5 rounded-2xl border transition flex items-center justify-between ${
-                                isSelected
-                                    ? 'bg-espresso text-cream border-gold shadow-md'
-                                    : 'bg-cream hover:bg-parchment text-cocoa border-latte/20'
-                            }">
-                            <div>
-                                <p class="font-bold text-sm ${isSelected ? 'text-gold' : 'text-cocoa'}">${m.name}</p>
-                                <p class="text-[11px] font-mono ${isSelected ? 'text-gold-light/70' : 'text-latte'}">${m.memberId}</p>
+                        <div class="p-4 rounded-2xl bg-espresso/90 border border-gold/25 flex flex-col justify-between gap-4">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <span class="text-xs font-mono text-gold">${m.id}</span>
+                                    <h4 class="font-bold text-base text-cream">${m.name}</h4>
+                                    <p class="text-[11px] text-cream/50">Bergabung: ${formatDateTime(m.createdAt)}</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold ${isFull ? 'bg-gold text-espresso' : 'bg-chocolate text-goldLight border border-gold/30'}">
+                                        ${count} / 10 Stempel
+                                    </span>
+                                </div>
                             </div>
-                            <span class="px-2.5 py-1 rounded-full text-xs font-bold ${
-                                Number(m.stamps) >= 10
-                                    ? 'bg-emerald-500/20 text-emerald-500 border border-emerald-500/40'
-                                    : (isSelected ? 'bg-gold/20 text-gold' : 'bg-espresso text-gold')
-                            }">
-                                ${m.stamps || 0}/10
-                            </span>
-                        </button>
+
+                            <div class="grid grid-cols-10 gap-1.5">
+                                ${Array.from({ length: 10 }).map((_, idx) => `
+                                    <div class="h-2.5 rounded-full ${idx < count ? 'bg-gold shadow-sm' : 'bg-chocolate border border-gold/20'}"></div>
+                                `).join('')}
+                            </div>
+
+                            <div class="flex items-center gap-2 pt-2 border-t border-gold/15">
+                                <button onclick="addStampToMember('${m.id}')" ${isFull ? 'disabled' : ''}
+                                    class="flex-1 py-2 px-3 rounded-xl font-bold text-xs transition ${isFull ? 'bg-chocolate/40 text-cream/30 cursor-not-allowed' : 'bg-gradient-to-r from-gold to-goldDark text-espresso hover:brightness-110'}">
+                                    ${isFull ? 'Kartu Penuh (10/10)' : '+ Beri 1 Stempel'}
+                                </button>
+                                <button onclick="openAdminMemberModal('${m.id}')"
+                                    class="py-2 px-3 rounded-xl bg-chocolate hover:bg-cocoa text-goldLight border border-gold/30 text-xs font-semibold transition">
+                                    Lihat Kartu & Riwayat
+                                </button>
+                            </div>
+                        </div>
                     `;
                 }).join('');
             }
 
-            // Render Selected Member Detail
-            renderAdminMemberDetail();
+            // 3. Log Stempel Global
+            const allStamps = [];
+            appDB.members.forEach(m => {
+                (m.stamps || []).forEach((s, idx) => {
+                    allStamps.push({
+                        memberName: m.name,
+                        memberId: m.id,
+                        stampNumber: idx + 1,
+                        date: s.date
+                    });
+                });
+            });
+            allStamps.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            // Render Claims List
-            renderAdminClaimsList();
-        }
-
-        window.selectAdminMember = function(memberId) {
-            selectedAdminMemberId = memberId;
-            renderAdminDashboard();
-        };
-
-        function renderAdminMemberDetail() {
-            const emptyBox = document.getElementById('admin-member-detail-empty');
-            const detailCard = document.getElementById('admin-member-detail-card');
-
-            if (!selectedAdminMemberId) {
-                emptyBox.classList.remove('hidden');
-                detailCard.classList.add('hidden');
-                return;
-            }
-
-            const member = allMembers.find(m => m.memberId === selectedAdminMemberId);
-            if (!member) {
-                emptyBox.classList.remove('hidden');
-                detailCard.classList.add('hidden');
-                return;
-            }
-
-            emptyBox.classList.add('hidden');
-            detailCard.classList.remove('hidden');
-
-            const stamps = Number(member.stamps || 0);
-            document.getElementById('adm-det-id').textContent = `ID: ${member.memberId}`;
-            document.getElementById('adm-det-name').textContent = member.name;
-            document.getElementById('adm-det-joined').textContent = `Terdaftar: ${formatDateIndo(member.createdAt)}`;
-            document.getElementById('adm-det-stamps').textContent = stamps;
-
-            // Mini 10 stamps grid
-            const miniGrid = document.getElementById('adm-stamps-grid');
-            miniGrid.innerHTML = '';
-            for (let i = 1; i <= 10; i++) {
-                const stamped = i <= stamps;
-                miniGrid.innerHTML += `
-                    <div class="h-12 rounded-xl border flex flex-col items-center justify-center ${
-                        stamped ? 'bg-gold text-espresso border-gold-light font-extrabold' : 'bg-espresso/50 border-gold/25 text-gold/30'
-                    }">
-                        ${stamped ? '<i class="fa-solid fa-crown text-[10px]"></i><span class="text-[7px] font-serif">PREMIOVAAPS</span>' : `<span class="text-xs font-bold">${i}</span>`}
-                    </div>
-                `;
-            }
-
-            // Disable add stamp button if already at 10
-            const addStampBtn = document.getElementById('btn-admin-add-stamp');
-            if (stamps >= 10) {
-                addStampBtn.disabled = true;
-                addStampBtn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gray-300 text-gray-600 cursor-not-allowed shrink-0';
-                addStampBtn.innerHTML = '<i class="fa-solid fa-check-double"></i> Maksimal 10 Stempel';
+            const globalStampEl = document.getElementById('adminGlobalStampLog');
+            if (allStamps.length === 0) {
+                globalStampEl.innerHTML = '<p class="text-cream/40 italic">Belum ada data stempel aktif.</p>';
             } else {
-                addStampBtn.disabled = false;
-                addStampBtn.className = 'btn-gold px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shrink-0';
-                addStampBtn.innerHTML = '<i class="fa-solid fa-stamp"></i> +1 Stempel PREMIOVAAPS';
-            }
-
-            // Stamp History
-            const histList = document.getElementById('adm-det-stamp-history');
-            const historyArr = Array.isArray(member.stampHistory) ? [...member.stampHistory].reverse() : [];
-            if (historyArr.length === 0) {
-                histList.innerHTML = `<p class="text-xs text-latte italic py-2">Belum ada riwayat stempel.</p>`;
-            } else {
-                histList.innerHTML = historyArr.map(h => `
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-cream border border-latte/15 text-xs">
-                        <div>
-                            <span class="font-bold text-cocoa">${h.note || 'Pembelian Aplikasi Premium'}</span>
-                            <span class="block text-[11px] text-latte">${formatDateIndo(h.date)}</span>
-                        </div>
-                        <span class="px-2 py-0.5 rounded bg-espresso text-gold font-bold text-[10px]">+1 Stempel</span>
+                globalStampEl.innerHTML = allStamps.slice(0, 20).map(item => `
+                    <div class="p-2 rounded-lg bg-chocolate/50 border border-gold/10 flex justify-between items-center">
+                        <span><strong class="text-goldLight">${item.memberName}</strong> (${item.memberId}) • Stempel #${item.stampNumber}</span>
+                        <span class="text-cream/60 font-mono text-[10px]">${formatDateTime(item.date)}</span>
                     </div>
                 `).join('');
             }
-        }
 
-        // Admin Gives 1 Stamp Manually & Records Date
-        window.adminGiveStamp = async function() {
-            if (!isAdminLoggedIn || !selectedAdminMemberId) return;
-            const member = allMembers.find(m => m.memberId === selectedAdminMemberId);
-            if (!member) return;
-
-            const currentStamps = Number(member.stamps || 0);
-            if (currentStamps >= 10) {
-                showToast("Member sudah memiliki 10 stempel penuh.", "info");
-                return;
-            }
-
-            try {
-                const nowIso = new Date().toISOString();
-                const updatedHistory = Array.isArray(member.stampHistory) ? [...member.stampHistory] : [];
-                updatedHistory.push({
-                    date: nowIso,
-                    note: `Stempel ke-${currentStamps + 1} (Diberikan Admin)`
-                });
-
-                const memberDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_members', member.memberId);
-                await updateDoc(memberDocRef, {
-                    stamps: currentStamps + 1,
-                    stampHistory: updatedHistory
-                });
-
-                showToast(`Berhasil menambahkan +1 stempel untuk ${member.name} (${currentStamps + 1}/10).`, "success");
-            } catch (err) {
-                console.error("Add stamp error:", err);
-                showToast("Gagal menambahkan stempel.", "error");
-            }
-        };
-
-        // Render All Reward Claims for Admin (Pending + Approved/Rejected History)
-        function renderAdminClaimsList() {
-            const container = document.getElementById('admin-claims-list');
-            if (allClaims.length === 0) {
-                container.innerHTML = `<p class="text-xs text-latte text-center py-8">Belum ada pengajuan klaim hadiah dari member.</p>`;
-                return;
-            }
-
-            container.innerHTML = allClaims.map(claim => {
-                const isPending = claim.status === 'PENDING';
-                let statusBadge = `<span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold border border-amber-300">MENUNGGU PERSETUJUAN</span>`;
-                if (claim.status === 'DISETUJUI') {
-                    statusBadge = `<span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-300">DISETUJUI</span>`;
-                } else if (claim.status === 'DITOLAK') {
-                    statusBadge = `<span class="px-3 py-1 rounded-full bg-red-100 text-red-800 text-xs font-bold border border-red-300">DITOLAK</span>`;
-                }
-
-                return `
-                    <div class="p-4 sm:p-5 rounded-2xl border ${isPending ? 'border-gold bg-cream' : 'border-latte/20 bg-white'} shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="space-y-1">
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="font-serif font-bold text-base text-cocoa">${claim.memberName}</span>
-                                <span class="text-xs font-mono bg-espresso text-gold px-2 py-0.5 rounded">${claim.memberId}</span>
-                                ${statusBadge}
-                            </div>
-                            <p class="text-sm text-mocha">Hadiah Pilihan: <strong class="text-cocoa">${claim.reward}</strong> (Bukti: ${claim.stampsProof}/10 Stempel)</p>
-                            <p class="text-xs text-latte">Tanggal Pengajuan Klaim: ${formatDateIndo(claim.createdAt)}</p>
-                            ${claim.processedAt ? `<p class="text-xs text-latte">Diproses Admin: ${formatDateIndo(claim.processedAt)}</p>` : ''}
-                            ${claim.status === 'DITOLAK' && claim.rejectReason ? `<p class="text-xs text-red-700 font-semibold mt-1">Alasan Penolakan: ${claim.rejectReason}</p>` : ''}
+            // 4. Riwayat Semua Klaim
+            const resolvedClaims = appDB.claims.filter(c => c.status !== 'PENDING').reverse();
+            const globalClaimEl = document.getElementById('adminGlobalClaimLog');
+            if (resolvedClaims.length === 0) {
+                globalClaimEl.innerHTML = '<p class="text-cream/40 italic">Belum ada klaim yang diproses.</p>';
+            } else {
+                globalClaimEl.innerHTML = resolvedClaims.map(c => `
+                    <div class="p-2.5 rounded-lg bg-chocolate/50 border border-gold/10 space-y-1">
+                        <div class="flex justify-between items-center">
+                            <span><strong class="text-cream">${c.memberName}</strong> (${c.memberId}) — <span class="text-goldLight">${c.reward}</span></span>
+                            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${c.status === 'APPROVED' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-red-500/20 text-red-300'}">
+                                ${c.status === 'APPROVED' ? 'DISETUJUI' : 'DITOLAK'}
+                            </span>
                         </div>
-
-                        ${isPending ? `
-                            <div class="flex items-center gap-2.5 shrink-0">
-                                <button type="button" onclick="adminApproveClaim('${claim.id}', '${claim.memberId}')"
-                                    class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow transition flex items-center gap-1.5">
-                                    <i class="fa-solid fa-check"></i> DISETUJUI
-                                </button>
-                                <button type="button" onclick="adminRejectClaim('${claim.id}')"
-                                    class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow transition flex items-center gap-1.5">
-                                    <i class="fa-solid fa-xmark"></i> DITOLAK
-                                </button>
-                            </div>
-                        ` : ''}
+                        <p class="text-[10px] text-cream/60">Klaim: ${formatDateTime(c.claimDate)} • Diproses: ${formatDateTime(c.resolvedDate)}</p>
+                        ${c.rejectReason ? `<p class="text-[10px] text-red-300">Alasan: ${c.rejectReason}</p>` : ''}
                     </div>
-                `;
-            }).join('');
+                `).join('');
+            }
+        };
+
+        window.addStampToMember = async function(memberId) {
+            const member = appDB.members.find(m => m.id === memberId);
+            if (!member) return;
+            member.stamps = member.stamps || [];
+
+            if (member.stamps.length >= 10) {
+                showToast('Kartu member sudah penuh (10 stempel).', 'error');
+                return;
+            }
+
+            const now = new Date().toISOString();
+            member.stamps.push({
+                date: now,
+                note: 'Pembelian Aplikasi Premium (Terverifikasi Admin)'
+            });
+
+            await saveDB(appDB);
+            showToast(`Berhasil menambahkan stempel ke-${member.stamps.length} untuk ${member.name}!`, 'success');
+            window.renderAdminDashboard();
+        };
+
+        window.approveClaim = async function(claimId) {
+            const claim = appDB.claims.find(c => c.id === claimId);
+            if (!claim || claim.status !== 'PENDING') return;
+
+            const member = appDB.members.find(m => m.id === claim.memberId);
+            const now = new Date().toISOString();
+
+            claim.status = 'APPROVED';
+            claim.resolvedDate = now;
+
+            if (member) {
+                member.stamps = [];
+                member.notifications = member.notifications || [];
+                member.notifications.push({
+                    id: 'NOTIF-' + Date.now(),
+                    type: 'approved',
+                    title: 'Klaim Hadiah Disetujui! 🎉',
+                    message: `Selamat! Klaim hadiah "${claim.reward}" Anda telah disetujui Admin PREMIOVAAPS. Kartu stempel Anda telah direset ke 0 untuk periode berikutnya.`,
+                    date: now,
+                    read: false
+                });
+            }
+
+            await saveDB(appDB);
+            showToast(`Klaim ${claim.memberName} disetujui & kartu direset ke 0 stempel.`, 'success');
+            window.renderAdminDashboard();
+        };
+
+        window.openRejectModal = function(claimId) {
+            document.getElementById('rejectClaimId').value = claimId;
+            document.getElementById('rejectReasonInput').value = '';
+            document.getElementById('rejectModal').classList.remove('hidden');
+            document.getElementById('rejectReasonInput').focus();
+        };
+
+        window.closeRejectModal = function() {
+            document.getElementById('rejectModal').classList.add('hidden');
+        };
+
+        window.confirmRejectClaim = async function() {
+            const claimId = document.getElementById('rejectClaimId').value;
+            const reason = document.getElementById('rejectReasonInput').value.trim();
+
+            if (!reason) {
+                showToast('Alasan penolakan wajib diisi!', 'error');
+                return;
+            }
+
+            const claim = appDB.claims.find(c => c.id === claimId);
+            if (!claim || claim.status !== 'PENDING') return;
+
+            const member = appDB.members.find(m => m.id === claim.memberId);
+            const now = new Date().toISOString();
+
+            claim.status = 'REJECTED';
+            claim.resolvedDate = now;
+            claim.rejectReason = reason;
+
+            if (member) {
+                member.notifications = member.notifications || [];
+                member.notifications.push({
+                    id: 'NOTIF-' + Date.now(),
+                    type: 'rejected',
+                    title: 'Pengajuan Klaim Hadiah Ditolak',
+                    message: `Klaim hadiah "${claim.reward}" ditolak dengan alasan: "${reason}". Silakan hubungi admin jika diperlukan.`,
+                    date: now,
+                    read: false
+                });
+            }
+
+            await saveDB(appDB);
+            window.closeRejectModal();
+            showToast(`Klaim ${claim.memberName} ditolak dengan alasan tercatat.`, 'info');
+            window.renderAdminDashboard();
+        };
+
+        window.openAdminMemberModal = function(memberId) {
+            const member = appDB.members.find(m => m.id === memberId);
+            if (!member) return;
+            const stamps = member.stamps || [];
+
+            document.getElementById('modalMemberName').textContent = member.name;
+            document.getElementById('modalMemberId').textContent = `ID Member: ${member.id}`;
+            document.getElementById('modalStampCount').textContent = `${stamps.length} / 10 Stempel`;
+
+            const gridEl = document.getElementById('modalStampsGrid');
+            let html = '';
+            for (let i = 0; i < 10; i++) {
+                const s = stamps[i];
+                if (s) {
+                    html += `
+                        <div class="aspect-square rounded-xl bg-espresso border border-gold flex items-center justify-center p-1">
+                            <div class="stamp-seal w-full h-full rounded-full flex items-center justify-center text-center">
+                                <span class="font-serif font-bold text-[7px] text-gold leading-none">PREMIOVAAPS</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="aspect-square rounded-xl bg-espresso/40 border border-dashed border-gold/25 flex items-center justify-center text-xs text-cream/30">
+                            ${i + 1}
+                        </div>
+                    `;
+                }
+            }
+            gridEl.innerHTML = html;
+
+            const histEl = document.getElementById('modalStampHistory');
+            if (stamps.length === 0) {
+                histEl.innerHTML = '<p class="text-cream/50 italic">Belum ada stempel pada kartu aktif.</p>';
+            } else {
+                histEl.innerHTML = stamps.map((s, idx) => `
+                    <div class="flex justify-between py-1 border-b border-gold/10 last:border-0">
+                        <span class="text-goldLight font-semibold">Stempel #${idx + 1}</span>
+                        <span class="text-cream/75 font-mono">${formatDateTime(s.date)}</span>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('adminMemberModal').classList.remove('hidden');
+        };
+
+        window.closeAdminMemberModal = function() {
+            document.getElementById('adminMemberModal').classList.add('hidden');
+        };
+
+        // ==================== INITIALIZATION ====================
+        function renderApp() {
+            const session = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+            const authSection = document.getElementById('authSection');
+            const memberDash = document.getElementById('memberDashboard');
+            const adminDash = document.getElementById('adminDashboard');
+            const headerActions = document.getElementById('headerActions');
+
+            authSection.classList.add('hidden');
+            memberDash.classList.add('hidden');
+            adminDash.classList.add('hidden');
+            headerActions.classList.add('hidden');
+
+            if (!session) {
+                authSection.classList.remove('hidden');
+            } else if (session.role === 'member') {
+                headerActions.classList.remove('hidden');
+                memberDash.classList.remove('hidden');
+                renderMemberDashboard(session.memberId);
+            } else if (session.role === 'admin') {
+                headerActions.classList.remove('hidden');
+                adminDash.classList.remove('hidden');
+                window.renderAdminDashboard();
+            }
         }
 
-        // Admin Approves Claim -> Resets Member Card to 0 Stamps & Keeps History
-        window.adminApproveClaim = async function(claimId, memberId) {
-            const { confirmed } = await showCustomModal({
-                title: 'Setujui Klaim Hadiah?',
-                message: 'Jika disetujui, status klaim menjadi DISETUJUI dan kartu stempel member akan otomatis direset menjadi 0 stempel. Riwayat klaim tetap tersimpan.',
-                confirmText: 'Ya, Setujui & Reset Kartu'
-            });
-
-            if (!confirmed) return;
-
-            try {
-                const nowIso = new Date().toISOString();
-                // 1. Update Claim Status
-                const claimDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_claims', claimId);
-                await updateDoc(claimDocRef, {
-                    status: 'DISETUJUI',
-                    processedAt: nowIso,
-                    dismissedByMember: false
-                });
-
-                // 2. Reset Member Stamps to 0
-                const memberDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_members', memberId);
-                await updateDoc(memberDocRef, {
-                    stamps: 0
-                });
-
-                showToast("Klaim DISETUJUI & kartu member berhasil direset ke 0 stempel!", "success");
-            } catch (err) {
-                console.error("Approve claim error:", err);
-                showToast("Gagal menyetujui klaim.", "error");
-            }
-        };
-
-        // Admin Rejects Claim -> Mandatory Reason Input
-        window.adminRejectClaim = async function(claimId) {
-            const { confirmed, value } = await showCustomModal({
-                title: 'Tolak Pengajuan Klaim',
-                message: 'Tuliskan alasan penolakan yang akan dikirimkan sebagai notifikasi ke member:',
-                confirmText: 'Tolak Klaim',
-                showInput: true,
-                inputLabel: 'Alasan Penolakan (Wajib)',
-                inputPlaceholder: 'Contoh: Bukti transaksi belum sesuai, silakan hubungi admin...'
-            });
-
-            if (!confirmed) return;
-
-            try {
-                const claimDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'premiovaaps_claims', claimId);
-                await updateDoc(claimDocRef, {
-                    status: 'DITOLAK',
-                    rejectReason: value,
-                    processedAt: new Date().toISOString(),
-                    dismissedByMember: false
-                });
-
-                showToast("Klaim ditolak beserta alasan penolakan.", "info");
-            } catch (err) {
-                console.error("Reject claim error:", err);
-                showToast("Gagal memproses penolakan klaim.", "error");
-            }
-        };
-
-        // Start Application on Load
-        window.addEventListener('DOMContentLoaded', initApp);
+        window.addEventListener('DOMContentLoaded', loadInitialDB);
     </script>
 </body>
 </html>
